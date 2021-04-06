@@ -1,6 +1,6 @@
 # MacOS
 .DS_Store
-
+.vscode
 # not ignore
 !.gitkeep
 
