@@ -11,27 +11,33 @@ function isSpace(c) {
         return false;
     }
 }
-// 判断一个字符是否是数字
-function isDigit(c) {
-    // console.log('isDigit');
-    if (c >= '0' && c <= '9') {
-        return true;
-    }
-    else {
+
+// 判断一个字符串是不是整数
+let isInteger = str => {
+    [...str].forEach(element => {
+        if (!isDigit(element)) {
+            return false;
+        }
+    });
+    return true;
+}
+
+// 判断一个字符串是否是浮点数
+let isFloat = str => {
+    if (!(str.indexOf('.') === str.lastIndexOf('.'))) {
         return false;
     }
+    var tmp = str.split('.').join('');
+    return isInteger(tmp);
 }
-// 判断一个字符是否是字母
-function isAlpha(c) {
-    // console.log('isAlpha');
-    if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')) {
-        return true;
-    }
-    else {
-        return false;
-    }
-}
+
+// 判断单个字符是否是数字
+let isDigit = c => c.length === 1 && '0123456789'.includes(c);
+
+// 判断单个字符是否是字母
+let isAlpha = c => c.length === 1 && c.match(/[a-z]/i) !== null;
+
 export { isSpace, isAlpha, isDigit };
+export { isInteger, isFloat };
 /* ------------------------end------------------------------------- */
 
-// console.log('czh我女神')

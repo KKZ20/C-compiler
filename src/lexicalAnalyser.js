@@ -75,8 +75,7 @@ class lexicalAnalysis {
     }
 }
 
-// console.log('辉哥好帅')
 
 export { lexicalAnalysis };
 
-
+console.log(utils.isAlpha('c'));
