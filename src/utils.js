@@ -1,6 +1,8 @@
-/**
- * * 模拟C++的字符判断函数------------------------------------------/
- */
+// 表示状态的常变量定义
+const ERROR = -1;
+const OK = 0;
+
+/* -------------------------模拟C++的字符判断函数-------------------------------*/
 // 判断一个字符是否是white-space
 function isSpace(c) {
     // console.log('isSpace');
@@ -37,7 +39,7 @@ let isDigit = c => c.length === 1 && '0123456789'.includes(c);
 // 判断单个字符是否是字母
 let isAlpha = c => c.length === 1 && c.match(/[a-z]/i) !== null;
 
+/* ---------------------------------end------------------------------------- */
+export { ERROR, OK };
 export { isSpace, isAlpha, isDigit };
 export { isInteger, isFloat };
-/* ------------------------end------------------------------------- */
-
