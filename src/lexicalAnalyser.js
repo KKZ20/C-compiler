@@ -210,7 +210,6 @@ class lexicalAnalysis {
     }
 
     // 将结果输出在文件中
-    //TODO: 格式化输出
     printToJson(path) {
         let tokenStream_json = JSON.stringify(this.tokenStream);
         try {
@@ -221,6 +220,11 @@ class lexicalAnalysis {
             console.log('将单词流写入json文件失败！');
             console.error(error);
         }
+    }
+
+    // 对外的一个单词流变量（叶神说的二进制方式读取）
+    getTokenStream() {
+        return this.tokenStream;
     }
 }
 

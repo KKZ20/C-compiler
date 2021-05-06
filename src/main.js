@@ -1,5 +1,5 @@
 import { lexicalAnalysis } from './lexicalAnalyser.js';
-import { ERROR, OK } from './utils.js';
+import { Type } from './grammaticalAnalyser.js';
 import fs from 'fs';
 /**
  * * 词法分析part
@@ -14,7 +14,7 @@ import fs from 'fs';
 const testCodePath = '../test/test_code.txt';
 const tokenStreamPath = '../result/token_stream.json';
 
-// 
+// 词法分析函数
 function lexicalAnalyse(testCodePath, tokenStreamPath) {
     let lexAnalyse = new lexicalAnalysis();
     lexAnalyse.readSourceCode(testCodePath);
@@ -22,9 +22,20 @@ function lexicalAnalyse(testCodePath, tokenStreamPath) {
     lexAnalyse.printToJson(tokenStreamPath);
 }
 
-// lexicalAnalyse(testCodePath, tokenStreamPath);
+function compiler() {
+    // 词法分析
+    lexicalAnalyse(testCodePath, tokenStreamPath);
+
+    // 语法分析
 
 
-var tokenStream = fs.readFileSync(tokenStreamPath, 'utf-8');
-let tokenStreamdata = JSON.parse(tokenStream);
-console.log(tokenStreamdata);
+    // 语义分析
+
+
+    // 中间代码生成
+
+}
+
+// var tokenStream = fs.readFileSync(tokenStreamPath, 'utf-8');
+// let tokenStreamdata = JSON.parse(tokenStream);
+// console.log(tokenStreamdata);
