@@ -36,6 +36,16 @@ class lexicalAnalysis {
         this.tokenStream = [];
     }
 
+    // jx提出的修改
+    findOperator(str) {
+        for (let i = 0; i < Operator.length; i++){
+            if (str === Operator[i] || str === Operator[i][0]) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     // 根据指定路径读文件内容
     readSourceCode(path) {
         try {
@@ -145,7 +155,7 @@ class lexicalAnalysis {
                 this.tokenStream.push(new Token(str, str, cur_row));
             }
             // 如果是操作符
-            else if (Operator.includes(str)) {
+            else if (this.findOperator(str)) {
                 //FIXME: 为什么这里就break了? 解决：如果遇到单个字符的操作符结尾，我们就正常把它输入单词流
                 if (i == length - 1) {
                     this.tokenStream.push(new Token(str, str, cur_row));

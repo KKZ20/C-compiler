@@ -36,6 +36,7 @@ function compiler() {
 
 }
 
-// var tokenStream = fs.readFileSync(tokenStreamPath, 'utf-8');
-// let tokenStreamdata = JSON.parse(tokenStream);
-// console.log(tokenStreamdata);
+compiler();
+var tokenStream = fs.readFileSync(tokenStreamPath, 'utf-8');
+let tokenStreamdata = JSON.parse(tokenStream);
+console.log(tokenStreamdata);
