@@ -221,7 +221,7 @@ class lexicalAnalysis {
 
     // 将结果输出在文件中
     printToJson(path) {
-        let tokenStream_json = JSON.stringify(this.tokenStream);
+        let tokenStream_json = JSON.stringify(this.tokenStream, null, 4);
         try {
             const data = fs.writeFileSync(path, tokenStream_json);
             console.log('词法分析生成的单词流已写入' + path);
