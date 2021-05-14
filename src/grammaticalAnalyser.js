@@ -212,14 +212,14 @@ class Grammar {
             changed = false;
             // 遍历所有非终结符
             for (let non_ter of this.nonTerminals) {
-                for (product of this.productions) {
+                for (let product of this.productions) {
                     if (product.left != non_ter) {
                         continue;
                     }
                     let it = product.right[0];
 
                     // 是终结符直接加入first集合并退出——改产生式不能继续使当前非终结符的First集合扩大
-                    if (utils.isTerminal(it) || this.symbols[it].type === Type.Epsilon) {
+                    if (utils.isTerminal(this.symbols, it) || this.symbols[it].type === Type.Epsilon) {
                         // 短路运算  不能交换位置
                         changed = !this.symbols[non_ter].first_set.has(it) || changed;
                         //FIXME: 这里一定是要保证set是有序的
@@ -231,7 +231,7 @@ class Grammar {
                     let flag = true; // 可推导出空串的标记
                     for (let m = 0; m < product.right.length; m++){
                         // 如果是终结符，停止迭代
-                        if (utils.isTerminal(product.right[m])) {
+                        if (utils.isTerminal(this.symbols, product.right[m])) {
                             changed = this.mergeSetExceptEmpty(this.symbols[non_ter].first_set, this.symbols[m].first_set) || changed;
                             flag = false;
                             break;
@@ -239,6 +239,7 @@ class Grammar {
                         changed = this.mergeSetExceptEmpty(this.symbols[non_ter].first_set, this.symbols[m].first_set) || changed;
                         // 若该非终结符可推导出空串，则继续迭代
                         flag = flag && this.symbols[m].first_set.has(this.getSymbolIndexById(GrammarSymbol.EmptyStr));
+                        // 否则直接结束当前产生式的处理
                         if (!flag) {
                             break;
                         }
@@ -261,14 +262,44 @@ class Grammar {
 
     //TODO: 获取产生式的FIRST集
     getFirstOfProduction(right) {
-        
+        let firstSet = new Set();
+        if (right.length === 0) {
+            return firstSet;
+        }
+        let it = right[0];
+        // 若是终结符或空串 加入后返回
+        if (utils.isTerminal(this.symbols, it) || this.symbols[it].type === Type.Epsilon) {
+            firstSet.add(it);
+            return firstSet;
+        }
+        // flag用于判断最终空串是否要加入到first集合
+        let flag = true;
+        for (let i = 0; i < right.length; i++){
+            // 初次进循环一定不是终结符
+            // 若是终结符，加入后直接退出——表示该右部不可能产生空串
+            if (utils.isTerminal(this.symbols, right[i])) {
+                this.mergeSetExceptEmpty(firstSet, this.symbols[right[i]].first_set);
+                flag = false;
+                break;
+            }
+            // 如是非终结符 合并first集合
+            this.mergeSetExceptEmpty(firstSet, this.symbols[right[i]].first_set);
+            flag = flag && this.symbols[right[i]].first_set.has(this.getSymbolIndexById(GrammarSymbol.EmptyStr));
+            if (!flag) {
+                break;
+            }
+        }
+        if (flag && i == right.length) {
+            firstSet.add(this.getSymbolIndexById(GrammarSymbol.EmptyStr));
+        }
+        return firstSet;
     }
 
     // Grammar类的初始化函数
     grammarInitialize(path) {
-        readProductions(path);
-        getFirstOfTerminal();
-        getFirstOfNonTerminal();
+        this.readProductions(path);
+        this.getFirstOfTerminal();
+        this.getFirstOfNonTerminal();
     }
 }
 
@@ -288,7 +319,7 @@ class LR1Item {
  * @brief LR(1)文法计算项集族时使用的闭包类型
  * @para itemClosure: 该闭包中LR(1)项的集合  Array(LR1Item)
  */
-class CLosure {
+class Closure {
     constructor() {
         this.itemClosure = [];
     }
@@ -325,6 +356,15 @@ class LR1 extends Grammar {
         this.gotoTable = new Map();
         this.actionTable = new Map();
     }
+    // 工具函数: 在Item集合中取LR项的索引
+    getLRItemsIndexByItem(item) {
+        for (let i = 0; i < this.lrItems.length; i++){
+            if (utils.itemEqual(item, this.lrItems[i])) {
+                return i;
+            }
+        }
+        return Npos;
+    }
     // 产生LR(0)项目
     generateLRItems() {
         // 这里的 A->ε 产生式依旧生成两个项目：A->·ε和A->ε·  后续做特殊处理
@@ -338,23 +378,203 @@ class LR1 extends Grammar {
         }
     }
 
-    // 计算LR1项目集簇
-    getItems() {
-        
+    // 工具函数：判断是否是已经存在的闭包
+    // clo为Closure
+    isExistedClosure(clo) {
+        for (let i = 0; i < this.itemCluster.length; i++){
+            if (utils.closureEqual(clo, this.itemCluster[i])) {
+                return i;
+            }
+        }
+        return Npos;
     }
 
+    // 计算closure闭包: 
+    // I为Closure
+    calClosure(I) {
+        for (let i = 0; i < I.itemClosure.length; i++){
+            // 对每个lr1项：[A -> α·Bβ, a]
+            const lr1_item = I.itemClosure[i];       // [A -> α·Bβ, a]
+            const lr0_item = this.lrItems[lr1_item.lrItem]; // A -> α·Bβ, 是一个单一产生式
+            // '·'在最后一个位置 其后继没有非终结符
+            if (lr0_item.dotPosition >= lr0_item.right.length) {
+                continue;
+            }
+            const B = lr0_item.right[lr0_item.dotPosition];
+            if (utils.isTerminal(this.symbols, B)) {
+                continue;
+            }
+            if (utils.isEpsilon(this.symbols, B)) {
+                // 如果B是ε，则当前项为 A->·ε
+                // 为了不在ε上引出转移边，直接将项变为：A->ε·
+                //FIXME: 我觉得这里会涉及深浅拷贝，去测试一下
+                let tmp = utils.deepCopySingle(lr0_item);
+                tmp.dotPosition++;
+                I.itemClosure[i].lrItem = this.getLRItemsIndexByItem(tmp);
+                continue;
+            }
+            let beta_a = [];
+            //FIXME: 对应gp603行
+            for (let k = lr0_item.dotPosition + 1; k < lr0_item.length; k++) {
+                beta_a.push(lr0_item.right[k]);
+            }
+            beta_a.push(lr1_item.lookAheadSymbol);
+            let first_of_beta_a = this.getFirstOfProduction(beta_a);
+            // 对每个 B -> ·γ 的lr0项
+            for (let j = 0; j < this.lrItems.length; j++){
+                if (this.lrItems[j].left !== B) {
+                    continue;
+                }
+                else {
+                    // 如果是 B->ε 则将 B->ε·项加入(为了不在ε上引出转移边)
+                    let is_epsilon = utils.isEpsilon(this.symbols, this.lrItems[j].right[0]);
+                    // 如果是ε产生式但dot不在尾部 继续遍历
+                    if (is_epsilon && this.lrItems[j].dotPosition != this.lrItems[j].right.length) {
+                        continue;
+                    }
+                    // 如果不是ε产生式且dot不在起始位置 继续遍历
+                    if (!is_epsilon && this.lrItems[j].dotPosition != 0) {
+                        continue;
+                    }
+                }
+                /* 将 [B -> ·γ, b] 加入到 I 中 */
+                /* 注意：1. 这里的b可能是'#'
+                        2. 如果是 B->ε 产生式，会将 [B -> ε·, b] 加入到 I 中
+                */
+                for (let b of first_of_beta_a) {
+                    if (!utils.isEpsilon(this.symbols, b)) {
+                        if (!I.search(new LR1Item(i, b))) {
+                            I.itemClosure.push(new LR1Item(i, b));
+                        }
+                    }
+                }
+            }
+        }
+        return I;
+    }
+
+    // 计算GOTO状态转移
+    // I为Closure，X为Number(int)
+    gotoState(I, X) {
+        let J = new Closure();
+        // X必须是终结符或非终结符
+        if (!utils.isTerminal(this.symbols, X) && !utils.isNonTerminal(this.symbols, X)) {
+            return J;
+        }
+        for (let lr1_item of I.itemClosure) {
+            // 对I中的每个 [A->α·Xβ, a]
+            let lr0_item = this.lrItems[lr1_item.lrItem];
+            // dot之后没有文法符号 继续遍历
+            if (lr0_item.dotPosition >= lr0_item.right.length) {
+                continue;
+            }
+            if (lr0_item.right[lr0_item.dotPosition] != X) {
+                continue;
+            }
+            let tmp = utils.deepCopySingle(lr0_item);
+            tmp.dotPosition++;
+            J.itemClosure.push(new LR1Item(this.getLRItemsIndexByItem(tmp), lr1_item.lookAheadSymbol));
+        }
+        return this.calClosure(J);
+    }
+
+    // 计算LR1项目集簇
+    getItems() {
+        /* 初始化 item_cluster Closure({S' → ·S, $]}) */
+        let initial_item = new Item(this.getSymbolIndexById(GrammarSymbol.ExtendStart),
+            [this.getSymbolIndexById(GrammarSymbol.StartToken)],
+            true, 0, this.startProduction);
+        let initial_closure = new Closure();
+        initial_closure.itemClosure.push(new LR1Item(this.getLRItemsIndexByItem(initial_item),
+            this.getSymbolIndexById(GrammarSymbol.EndToken)));
+
+        this.itemCluster.push(this.calClosure(initial_closure));
+
+        // itemCluster中的每个项
+        for (let i = 0; i < this.itemCluster.length; i++){
+            for (let s = 0; s < this.symbols.length; s++){
+                // 文法符号：终结符或非终结符
+                if (this.symbols[s].type !== Type.Terminal && this.symbols[s].type !== Type.NonTerminal) {
+                    continue;
+                }
+                // 计算 Goto(I,X)
+                let transfer = this.gotoState(this.itemCluster[i], s);
+                // 为空则跳过
+                if (transfer.itemClosure.length === 0) {
+                    continue;
+                }
+                // 已经存在 记录转移状态即可
+                let existed_index = this.isExistedClosure(transfer);
+                if (existed_index !== Npos) {
+                    this.gotoTemp.set(utils.generateKey(i, s), existed_index);
+                    continue;
+                }
+                // 不存在也不为空 加入进item_cluster并记录转移状态
+                this.itemCluster.push(transfer);
+                // 记录closure之间的转移关系
+                this.gotoTemp.set(utils.generateKey(i, s), this.itemCluster.length - 1);
+            }
+        }
+    }
+
+    // 构建LR1表
     buildTable() {
-        
+        for (let cluster_idx = 0; cluster_idx < this.itemCluster.length; cluster_idx++){
+            for (let lr_item_idx = 0; lr_item_idx < this.lrItems.length; lr_item_idx++){
+                for (let ter of this.terminals) {
+                    // 如果lr1项不在当前闭包中 继续遍历
+                    if (!this.itemCluster[cluster_idx].search(new LR1Item(lr_item_idx, ter))) {
+                        continue;
+                    }
+                    let lr0_item = this.lrItems[lr_item_idx];
+                    let pro_index = lr0_item.productionIndex;
+                    let pro_left = lr0_item.left;
+                    let pro_dot_pos = lr0_item.dotPosition;
+                    let la_symbol = ter;
+                    if (pro_dot_pos >= lr0_item.right.length) {
+                        if (this.symbols[pro_left].id !== GrammarSymbol.ExtendStart) {
+                            this.actionTable.set(utils.generateKey(cluster_idx, la_symbol), utils.generateKey(Action.Reduce, pro_index));
+                        }
+                        else {
+                            let end_index = this.getSymbolIndexById(GrammarSymbol.EndToken);
+                            this.actionTable.set(utils.generateKey(cluster_idx, end_index), utils.generateKey(Action.Accept, -1));
+                        }
+                    }
+                    else {
+                        let item_after_dot = lr0_item.right[pro_dot_pos];
+                        if (!utils.isNonTerminal(this.symbols, item_after_dot)) {
+                            continue;
+                        }
+                        if (this.gotoTemp.has(utils.generateKey(cluster_idx, item_after_dot))) {
+                            this.actionTable.set(utils.generateKey(cluster_idx, item_after_dot),
+                                utils.generateKey(Action.ShiftIn, this.gotoTemp.get(utils.generateKey(cluster_idx, item_after_dot))));
+                        }
+                    }
+                }
+                for (let non_ter of this.nonTerminals) {
+                    if (this.gotoTemp.has(utils.generateKey(cluster_idx, non_ter))) {
+                        this.gotoTable.set(utils.generateKey(cluster_idx, non_ter),
+                            utils.generateKey(Action.ShiftIn, this.gotoTemp.get(utils.generateKey(cluster_idx, non_ter))));
+                    }
+                }
+            }
+        }
+    }
+
+    // 报错
+    raiseError(token) {
+        console.log('\nError found near : ' + token.value + '【row = ' + token.row_no + '】');
     }
 
     // LR1类的初始化函数
-    //FIXME: gp传了参数（grammar_path），但没用，所以我这里就没传
+    //FIXME: 注意调用LR_1之前一定要先调用Grammar类的初始化函数
     LR_1() {
-        generateLRItems();
-        getItems();
-        buildTable();
+        this.generateLRItems();
+        this.getItems();
+        this.buildTable();
     }
 }
 
-export { Npos, Type, GrammarSymbol };
+export { Grammar, LR1 };
+export { Type, GrammarSymbol, Action };
 

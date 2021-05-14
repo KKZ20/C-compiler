@@ -73,7 +73,7 @@ let isSameSetInOrder = (a, b) => {
     return true;
 }
 // 判断两个产生式（Item，详见grammaticalAnalyser.js中定义）是否相等
-let isEqual = (item1, item2) => {
+let itemEqual = (item1, item2) => {
     return (item1.left === item2.left && arrayEqual(item1.right, item2.right) &&
             item1.isLR1Item === item2.isLR1Item && item1.dotPosition === item2.dotPosition &&
                 item1.productionIndex === item2.productionIndex);
@@ -133,11 +133,31 @@ function closureEqual(a, b) {
 let generateKey = (value1, value2) => {
     return String(value1) + '_' + String(value2);
 }
+
+// 工具函数：单层对象的深拷贝
+//FIXME: 但下面的深拷贝方法遇到循环引用，会陷入一个循环的递归过程，从而导致爆栈。
+function deepCopySingle(obj) {
+    let result = Array.isArray(obj)?[]:{};
+    if(obj && typeof obj === "object"){
+        for(let key in obj){
+            if(obj.hasOwnProperty(key)){
+                if(obj[key] && typeof obj[key] === "object"){
+                    result[key] = deepCopySingle(obj[key]);
+                }
+                else {
+                    result[key] = obj[key];
+                }
+            }
+        }
+    }
+    return result;
+}
 /* ---------------------------------end------------------------------------- */
 
 export { ERROR, OK };
 export { isSpace, isAlpha, isDigit };
 export { isInteger, isFloat };
-export { isEqual, isSameSetInOrder, lr1ItemEqual, closureEqual };
+export { itemEqual, isSameSetInOrder, lr1ItemEqual, closureEqual };
 export { isNonTerminal, isTerminal, isEpsilon, isEndtoken };
+export { deepCopySingle };
 export { generateKey };

@@ -1,0 +1,65 @@
+# 产生式规则 Vn -> (Vt + Vn)*; '#'行为注释
+# '@' 表示空串; '<ID>'为标识符; '<INT>'为整型常量; '<FLOAT>'为浮点常量
+# 注意：读入文法产生式后，通过 ' | '进行右部分离
+# 文法必须符合拓展文法的要求，且拓展文法的起始符号为 "S"
+# 原始文法的起始符号必须是 "Program"
+# %token 标记后必须列出所有终结符
+
+%token -> <ID> | <INT> | <FLOAT> | ; | , | void | int | float | ( | ) | { | } | return | if | else | while | + | - | * | / | = | += | -= | *= | /= | ! | && | || | > | < | >= | <= | != | ==
+
+# 拓展文法产生式
+S -> Program
+# Program为起始符号，表示整个程序
+Program -> ExtDefList
+# Program产生多个外部定义
+ExtDefList -> ExtDef ExtDefList | @
+# ExtDef表示一个全局变量或函数的定义
+ExtDef     -> Specifier <ID> ; | Specifier FunDec Block ExitFunTable_m
+
+# 类型
+Specifier -> void | int | float
+
+# 函数定义
+FunDec -> <ID> CreateFunTable_m ( VarList )
+CreateFunTable_m -> @
+ExitFunTable_m -> @
+
+# 函数形参列表
+VarList -> ParamDec , VarList | ParamDec | @
+# 函数形参
+ParamDec -> Specifier <ID>
+
+# 代码块定义
+Block -> Block_m { DefList StmtList }
+Block_m -> @
+# 语句列表
+StmtList -> Stmt StmtList | @
+# 单语句
+Stmt -> Exp ; | return Exp ; | IfStmt | WhileStmt
+
+IfStmt -> if IfStmt_m1 ( Exp ) IfStmt_m2 Block IfNext
+IfNext -> @ | IfStmt_next else Block
+IfStmt_m1 -> @
+IfStmt_m2 -> @
+IfStmt_next -> @
+
+WhileStmt -> while WhileStmt_m1 ( Exp ) WhileStmt_m2 Block
+WhileStmt_m1 -> @
+WhileStmt_m2 -> @
+
+# 块内变量定义
+DefList -> Def DefList | @
+Def -> Specifier Dec ;
+Dec -> <ID> | <ID> = Exp
+
+# 算术运算符
+Aritop -> + | - | * | /
+# 赋值运算符
+Assignop -> = | += | -= | *= | /=
+# 关系运算符
+Relop -> > | < | >= | <= | == | !=
+# 基本表达式
+Exp -> <ID> Assignop Exp | Exp Relop Exp | Exp Aritop Exp | ( Exp ) | <ID> ( CallFunCheck Args ) | <ID> | <INT> | <FLOAT>
+CallFunCheck -> @
+# 函数调用实参
+Args -> Exp , Args | Exp | @
