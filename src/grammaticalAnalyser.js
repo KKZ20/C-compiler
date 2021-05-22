@@ -1,4 +1,6 @@
+import { FORMERR } from 'dns';
 import fs from 'fs';
+import { Token } from './lexicalAnalyser.js';
 import * as utils from './utils.js';
 
 // 非法位置
@@ -101,9 +103,13 @@ class Grammar {
         let set1Existed = set1.has(epsilonIndex);
         let sizeBeforeAdd = set1.size;
 
-        for (s of set2) {
+        for (let s of set2) {
+            // FIXME: 这里一定是要保证set是有序的
+            // FIXME: 这里不能排序，否则block会有错
             set1.add(s);
+
         }
+        // set1 = new Set(Array.from(set1).sort(function (a, b) { return a - b }));
         if (!set1Existed) {
             set1.delete(epsilonIndex);
         }
@@ -121,8 +127,7 @@ class Grammar {
             // '#'认为是终结符 
             //FIXME: 这里一定是要保证set是有序的
             this.terminals.add(this.symbols.length - 1);
-            this.terminals = new Set(Array.from(this.terminals).sort());
-            
+            this.terminals = new Set(Array.from(this.terminals).sort(function (a, b) { return a - b }));
             this.symbols.push(new Symbol(GrammarSymbol.EmptyStr, Type.Epsilon));
 
             // 开始一行一行处理
@@ -135,7 +140,10 @@ class Grammar {
                 // 产生式的左右部
                 let left, right;
                 let strs_p;
-                strs_p = grammarIn[i].split(GrammarSymbol.ProToken);
+                // strs_p = grammarIn[i].split(GrammarSymbol.ProToken); //FIXME: 用自己写的split
+                strs_p = utils.mySplit(grammarIn[i], GrammarSymbol.ProToken);
+                //FIXME: 这里面要把分割后的所有串去掉首尾空格
+
                 // 通过->符号分割成左右两部
                 if (strs_p.length === 2) {
                     left = strs_p[0];
@@ -143,17 +151,25 @@ class Grammar {
                 }
                 else {
                     //FIXME: 如何直接在这里退出整个程序
-                    console.log('文法文件有误！');
+                    console.log('\n文法文件有误！');
                     return utils.ERROR;
                 }
                 // 分隔右侧多个产生式
-                let rightSecs_p = right.split(GrammarSymbol.SplitStr);
+                // let rightSecs_p = right.split(GrammarSymbol.SplitStr); //FIXME: 用自己写的split
+                let rightSecs_p = utils.mySplit(right, GrammarSymbol.SplitStr);
+                
                 if (left == '%token') {
                     for (let j = 0; j < rightSecs_p.length; j++){
-                        this.symbols.push(new Symbol(rightSecs_p[i], Type.Terminal));
+                        this.symbols.push(new Symbol(rightSecs_p[j], Type.Terminal));
                         //FIXME: 这里一定是要保证set是有序的
                         this.terminals.add(this.symbols.length - 1);
-                        this.terminals = new Set(Array.from(this.terminals).sort());
+                        this.terminals = new Set(Array.from(this.terminals).sort(function(a, b){return a - b}));
+                        if (rightSecs_p[j] === '&&') {
+                            this.symbols.push(new Symbol('||', Type.Terminal));
+                            //FIXME: 这里一定是要保证set是有序的
+                            this.terminals.add(this.symbols.length - 1);
+                            this.terminals = new Set(Array.from(this.terminals).sort(function(a, b){return a - b}));
+                        }
                     }
                 }
                 else {
@@ -163,7 +179,7 @@ class Grammar {
                         leftIndex = this.symbols.length - 1;
                         //FIXME: 这里一定是要保证set是有序的
                         this.nonTerminals.add(leftIndex);
-                        this.nonTerminals = new Set(Array.from(this.nonTerminals).sort());
+                        this.nonTerminals = new Set(Array.from(this.nonTerminals).sort(function(a, b){return a - b}));
                     }
                     for (let str of rightSecs_p) {
                         // 产生式右部分割成基本单元
@@ -177,21 +193,23 @@ class Grammar {
                                 rightUnitIndex = this.symbols.length - 1;
                                 //FIXME: 这里一定是要保证set是有序的
                                 this.nonTerminals.add(rightUnitIndex);
-                                this.nonTerminals = new Set(Array.from(this.nonTerminals).sort());
+                                this.nonTerminals = new Set(Array.from(this.nonTerminals).sort(function(a, b){return a - b}));
                             }
                             rightIndex.push(rightUnitIndex);
                         }
-                        this.productions.push(new Item(leftIndex, rightIndex));
+                        this.productions.push(new Item(leftIndex, rightIndex, 0, -1, -1));
                         if (this.symbols[leftIndex].id === GrammarSymbol.ExtendStart) {
                             this.startProduction = this.productions.length - 1;
                         }
                     }
                 }
             }
+            return utils.OK;
         }
         catch(err) {
-            console.log('打开语法文件' + path + '失败！');
+            console.log('\n打开语法文件 ' + path + ' 失败！');
             console.error(err);
+            process.exit(-1);
         }
     }
 
@@ -201,7 +219,7 @@ class Grammar {
         for (let ter of this.terminals) {
             //FIXME: 这里一定是要保证set是有序的
             this.symbols[ter].first_set.add(ter);
-            this.symbols[ter].first_set = new Set(Array.from(this.symbols[ter].first_set).sort());
+            this.symbols[ter].first_set = new Set(Array.from(this.symbols[ter].first_set).sort(function(a, b){return a - b}));
         }
     }
 
@@ -212,33 +230,39 @@ class Grammar {
             changed = false;
             // 遍历所有非终结符
             for (let non_ter of this.nonTerminals) {
+                // console.log(non_ter);
                 for (let product of this.productions) {
                     if (product.left != non_ter) {
                         continue;
                     }
                     let it = product.right[0];
-
+                    
                     // 是终结符直接加入first集合并退出——改产生式不能继续使当前非终结符的First集合扩大
                     if (utils.isTerminal(this.symbols, it) || this.symbols[it].type === Type.Epsilon) {
                         // 短路运算  不能交换位置
                         changed = !this.symbols[non_ter].first_set.has(it) || changed;
                         //FIXME: 这里一定是要保证set是有序的
-                        this.symbols[ter].first_set.add(it);
-                        this.symbols[ter].first_set = new Set(Array.from(this.symbols[ter].first_set).sort());
+                        this.symbols[non_ter].first_set.add(it);
+                        this.symbols[non_ter].first_set = new Set(Array.from(this.symbols[non_ter].first_set).sort(function(a, b){return a - b}));
                         continue;
                     }
                     // 右部以非终结符开始
                     let flag = true; // 可推导出空串的标记
-                    for (let m = 0; m < product.right.length; m++){
+                    let m;
+                    for (m = 0; m < product.right.length; m++){
                         // 如果是终结符，停止迭代
                         if (utils.isTerminal(this.symbols, product.right[m])) {
-                            changed = this.mergeSetExceptEmpty(this.symbols[non_ter].first_set, this.symbols[m].first_set) || changed;
+                            changed = this.mergeSetExceptEmpty(this.symbols[non_ter].first_set, this.symbols[product.right[m]].first_set) || changed;
+                            //FIXME: 函数出来再排序
+                            this.symbols[non_ter].first_set = new Set(Array.from(this.symbols[non_ter].first_set).sort(function(a, b){return a - b}));
                             flag = false;
                             break;
                         }
-                        changed = this.mergeSetExceptEmpty(this.symbols[non_ter].first_set, this.symbols[m].first_set) || changed;
+                        changed = this.mergeSetExceptEmpty(this.symbols[non_ter].first_set, this.symbols[product.right[m]].first_set) || changed;
+                        //FIXME: 函数出来再排序
+                        this.symbols[non_ter].first_set = new Set(Array.from(this.symbols[non_ter].first_set).sort(function(a, b){return a - b}));
                         // 若该非终结符可推导出空串，则继续迭代
-                        flag = flag && this.symbols[m].first_set.has(this.getSymbolIndexById(GrammarSymbol.EmptyStr));
+                        flag = flag && this.symbols[product.right[m]].first_set.has(this.getSymbolIndexById(GrammarSymbol.EmptyStr));
                         // 否则直接结束当前产生式的处理
                         if (!flag) {
                             break;
@@ -248,8 +272,8 @@ class Grammar {
                     if (flag && m >= product.right.length) {
                         changed = !this.symbols[non_ter].first_set.has(this.getSymbolIndexById(GrammarSymbol.EmptyStr)) || changed;
                         //FIXME: 这里一定是要保证set是有序的
-                        this.symbols[ter].first_set.add(it);
-                        this.symbols[ter].first_set = new Set(Array.from(this.symbols[ter].first_set).sort());
+                        this.symbols[non_ter].first_set.add(this.getSymbolIndexById(GrammarSymbol.EmptyStr));
+                        this.symbols[non_ter].first_set = new Set(Array.from(this.symbols[non_ter].first_set).sort(function(a, b){return a - b}));
                         continue;
                     }
                 }
@@ -260,7 +284,7 @@ class Grammar {
         }
     }
 
-    //TODO: 获取产生式的FIRST集
+    // 获取产生式的FIRST集
     getFirstOfProduction(right) {
         let firstSet = new Set();
         if (right.length === 0) {
@@ -269,7 +293,9 @@ class Grammar {
         let it = right[0];
         // 若是终结符或空串 加入后返回
         if (utils.isTerminal(this.symbols, it) || this.symbols[it].type === Type.Epsilon) {
+            //FIXME: 这里一定是要保证set是有序的
             firstSet.add(it);
+            firstSet = new Set(Array.from(firstSet).sort(function(a, b){return a - b}));
             return firstSet;
         }
         // flag用于判断最终空串是否要加入到first集合
@@ -279,25 +305,31 @@ class Grammar {
             // 若是终结符，加入后直接退出——表示该右部不可能产生空串
             if (utils.isTerminal(this.symbols, right[i])) {
                 this.mergeSetExceptEmpty(firstSet, this.symbols[right[i]].first_set);
+                //FIXME: 函数出来再排序
+                firstSet = new Set(Array.from(firstSet).sort(function(a, b){return a - b}));
                 flag = false;
                 break;
             }
             // 如是非终结符 合并first集合
             this.mergeSetExceptEmpty(firstSet, this.symbols[right[i]].first_set);
+            //FIXME: 函数出来再排序
+            firstSet = new Set(Array.from(firstSet).sort(function(a, b){return a - b}));
             flag = flag && this.symbols[right[i]].first_set.has(this.getSymbolIndexById(GrammarSymbol.EmptyStr));
             if (!flag) {
                 break;
             }
         }
         if (flag && i == right.length) {
+            // FIXME: 这里一定是要保证set是有序的
             firstSet.add(this.getSymbolIndexById(GrammarSymbol.EmptyStr));
+            firstSet = new Set(Array.from(firstSet).sort(function(a, b){return a - b}));
         }
         return firstSet;
     }
 
     // Grammar类的初始化函数
     grammarInitialize(path) {
-        this.readProductions(path);
+        this.readProductions(path) === utils.OK;
         this.getFirstOfTerminal();
         this.getFirstOfNonTerminal();
     }
@@ -334,6 +366,7 @@ class Closure {
         return false;
     }
 }
+
 //TODO: ! Actioninfo形式为<int(Action), int(info)>
 //TODO: ! pair形式为<int(当前Closure在itemCluster中的index), int(当前符号在symbols中的index)> 
 /**
@@ -365,12 +398,15 @@ class LR1 extends Grammar {
         }
         return Npos;
     }
+
     // 产生LR(0)项目
     generateLRItems() {
         // 这里的 A->ε 产生式依旧生成两个项目：A->·ε和A->ε·  后续做特殊处理
         for (let i = 0; i < this.productions.length; i++){
-            for (let dot = 0; dot < this.productions[i].right.length; dot++){
-                this.lrItems.push(this.productions[i]);
+            for (let dot = 0; dot <= this.productions[i].right.length; dot++){
+                //FIXME: 深浅拷贝！！！！
+                let temp = utils.deepCopySingle(this.productions[i]);
+                this.lrItems.push(temp);
                 this.lrItems[this.lrItems.length - 1].isLR1Item = true;
                 this.lrItems[this.lrItems.length - 1].dotPosition = dot;
                 this.lrItems[this.lrItems.length - 1].productionIndex = i;
@@ -393,9 +429,18 @@ class LR1 extends Grammar {
     // I为Closure
     calClosure(I) {
         for (let i = 0; i < I.itemClosure.length; i++){
+            // console.log('START:-----', I.itemClosure);
+            // for (let kkk = 0; kkk < I.itemClosure.length; kkk++){
+            //     console.log('LrItems: ', this.lrItems[I.itemClosure[kkk].lrItem]);
+            // }
             // 对每个lr1项：[A -> α·Bβ, a]
             const lr1_item = I.itemClosure[i];       // [A -> α·Bβ, a]
             const lr0_item = this.lrItems[lr1_item.lrItem]; // A -> α·Bβ, 是一个单一产生式
+            // console.log('--------------');
+            // console.log('LR1ITEM: ', lr1_item);
+            // console.log('----------------');
+            // console.log('LR0ITEM: ', lr0_item);
+            // console.log('------------------');
             // '·'在最后一个位置 其后继没有非终结符
             if (lr0_item.dotPosition >= lr0_item.right.length) {
                 continue;
@@ -415,11 +460,14 @@ class LR1 extends Grammar {
             }
             let beta_a = [];
             //FIXME: 对应gp603行
-            for (let k = lr0_item.dotPosition + 1; k < lr0_item.length; k++) {
+            for (let k = lr0_item.dotPosition + 1; k < lr0_item.right.length; k++) {
                 beta_a.push(lr0_item.right[k]);
             }
+            // console.log('beta_a: ', beta_a);
             beta_a.push(lr1_item.lookAheadSymbol);
+            // console.log('bbbeta_a: ', beta_a);
             let first_of_beta_a = this.getFirstOfProduction(beta_a);
+            // console.log('firstbeta: ', first_of_beta_a);
             // 对每个 B -> ·γ 的lr0项
             for (let j = 0; j < this.lrItems.length; j++){
                 if (this.lrItems[j].left !== B) {
@@ -429,11 +477,11 @@ class LR1 extends Grammar {
                     // 如果是 B->ε 则将 B->ε·项加入(为了不在ε上引出转移边)
                     let is_epsilon = utils.isEpsilon(this.symbols, this.lrItems[j].right[0]);
                     // 如果是ε产生式但dot不在尾部 继续遍历
-                    if (is_epsilon && this.lrItems[j].dotPosition != this.lrItems[j].right.length) {
+                    if (is_epsilon && this.lrItems[j].dotPosition !== this.lrItems[j].right.length) {
                         continue;
                     }
                     // 如果不是ε产生式且dot不在起始位置 继续遍历
-                    if (!is_epsilon && this.lrItems[j].dotPosition != 0) {
+                    if (!is_epsilon && this.lrItems[j].dotPosition !== 0) {
                         continue;
                     }
                 }
@@ -443,13 +491,14 @@ class LR1 extends Grammar {
                 */
                 for (let b of first_of_beta_a) {
                     if (!utils.isEpsilon(this.symbols, b)) {
-                        if (!I.search(new LR1Item(i, b))) {
-                            I.itemClosure.push(new LR1Item(i, b));
+                        if (!I.search(new LR1Item(j, b))) {
+                            I.itemClosure.push(new LR1Item(j, b));
                         }
                     }
                 }
             }
         }
+        // console.log('in losur: ', I);
         return I;
     }
 
@@ -489,7 +538,6 @@ class LR1 extends Grammar {
             this.getSymbolIndexById(GrammarSymbol.EndToken)));
 
         this.itemCluster.push(this.calClosure(initial_closure));
-
         // itemCluster中的每个项
         for (let i = 0; i < this.itemCluster.length; i++){
             for (let s = 0; s < this.symbols.length; s++){
@@ -499,12 +547,29 @@ class LR1 extends Grammar {
                 }
                 // 计算 Goto(I,X)
                 let transfer = this.gotoState(this.itemCluster[i], s);
+                // if (i === 51) {
+                //     console.log("s: ", s);
+                //     console.log(transfer);
+                //     if (s === 2) {
+                //         console.log('就是你了！', this.itemCluster[29]);
+                //     }
+                    
+                // }
                 // 为空则跳过
                 if (transfer.itemClosure.length === 0) {
+                    // if (i === 51) {
+                    //     console.log("空");
+                    // }   
                     continue;
                 }
                 // 已经存在 记录转移状态即可
                 let existed_index = this.isExistedClosure(transfer);
+                // if (i === 51) {
+                //     console.log("item_cluster: ", this.itemCluster.length);
+                //     console.log("s(existed_index): ", s);
+                //     console.log("existed_index: ", existed_index);
+                // }
+                
                 if (existed_index !== Npos) {
                     this.gotoTemp.set(utils.generateKey(i, s), existed_index);
                     continue;
@@ -518,6 +583,7 @@ class LR1 extends Grammar {
     }
 
     // 构建LR1表
+    //FIXME: 注意构建出的用来记录LR1表的map是无序的
     buildTable() {
         for (let cluster_idx = 0; cluster_idx < this.itemCluster.length; cluster_idx++){
             for (let lr_item_idx = 0; lr_item_idx < this.lrItems.length; lr_item_idx++){
@@ -531,6 +597,14 @@ class LR1 extends Grammar {
                     let pro_left = lr0_item.left;
                     let pro_dot_pos = lr0_item.dotPosition;
                     let la_symbol = ter;
+                    // if (cluster_idx === 0 && lr_item_idx === 0) {
+                    //     console.log('lr0_item: ', lr0_item);
+                    //     console.log('pro_index: ', pro_index);
+                    //     console.log('pro_left: ', pro_left);
+                    //     console.log('pro_dot_pos: ', pro_dot_pos);
+                    //     console.log('la_symbol: ', la_symbol);
+                    // }
+                    
                     if (pro_dot_pos >= lr0_item.right.length) {
                         if (this.symbols[pro_left].id !== GrammarSymbol.ExtendStart) {
                             this.actionTable.set(utils.generateKey(cluster_idx, la_symbol), utils.generateKey(Action.Reduce, pro_index));
@@ -542,7 +616,7 @@ class LR1 extends Grammar {
                     }
                     else {
                         let item_after_dot = lr0_item.right[pro_dot_pos];
-                        if (!utils.isNonTerminal(this.symbols, item_after_dot)) {
+                        if (!utils.isTerminal(this.symbols, item_after_dot)) {
                             continue;
                         }
                         if (this.gotoTemp.has(utils.generateKey(cluster_idx, item_after_dot))) {
@@ -572,6 +646,144 @@ class LR1 extends Grammar {
         this.generateLRItems();
         this.getItems();
         this.buildTable();
+    }
+
+    // 输出LR1表
+    showLR1Table() {
+        
+    }
+
+    // 利用已经构建好的LR1分析表进行语法分析
+    parseToken(tokenStream) {
+        let outputStream = '';
+        tokenStream.push(new Token(GrammarSymbol.EndToken, GrammarSymbol.EndToken, Number.MAX_SAFE_INTEGER));
+        class temp_pair {
+            constructor(state_, symbol_) {
+                this.first = state_;
+                this.second = symbol_;
+            }
+        }
+        let symbol_stack = [];  // temp_pair, first -> pstate; second -> psymbol
+        let g_error_count = 0;  // 语法分析报错个数
+        let s_error_count = 0;  // 词法分析报错个数
+        
+        //TODO: 语义分析部分 
+        //TODO: semantic.AddSymbolToList(SymbolAttribute(StartToken));
+
+        let step = 0;
+        outputStream += '步骤 \t 符号栈 \t 产生式 \n';
+        // 栈初始化
+        symbol_stack.push(new temp_pair(0, this.getSymbolIndexById(GrammarSymbol.EndToken)));
+        outputStream += (String(++step) + ' \t ');
+        for (let p of symbol_stack) {
+            outputStream += '(';
+            outputStream += String(p.first);
+            outputStream += ',';
+            outputStream += this.symbols[p.second].id;
+            outputStream += ')';
+        }
+        outputStream += ' \t \n';
+        let endFlag = false;
+        // 开始分析
+        for (let i = 0; i < tokenStream.length; i++){
+            let cur_state = symbol_stack[symbol_stack.length - 1].first;
+            let token_idx = this.getSymbolIndexById(tokenStream[i].token);
+            if (!this.actionTable.has(utils.generateKey(cur_state, token_idx))) {
+                this.raiseError(tokenStream[i]);
+                do {
+                    symbol_stack.pop();
+                } while (!this.actionTable.has(utils.generateKey(symbol_stack[symbol_stack.length - 1].first, token_idx)));
+                i--;
+                g_error_count++;
+            }
+            else {
+                let action_iter = this.actionTable.get(utils.generateKey(cur_state, token_idx));
+                let action_info = utils.parseValue(action_iter);
+                switch (action_info.action) {
+                    case Action.ShiftIn:
+                        symbol_stack.push(new temp_pair(action_info.info, token_idx));
+                        outputStream += (String(++step) + ' \t ');
+                        for (let p of symbol_stack) {
+                            outputStream += '(';
+                            outputStream += String(p.first);
+                            outputStream += ',';
+                            outputStream += this.symbols[p.second].id;
+                            outputStream += ')';
+                        }
+                        outputStream += ' \t \n';
+                        break;
+                    case Action.Reduce:
+                        let production = this.productions[action_info.info];
+                        /* 非空串需要出栈 空串由于右部为空
+                         * 不需要出栈(直接push空串对应产生式左部非终结符即可) */
+                        if (!utils.isEpsilon(this.symbols, production.right[0])) {
+                            let count = production.right.length;
+                            while (count--) {
+                                symbol_stack.pop();
+                            }
+                        }
+                        if (!this.gotoTable.has(utils.generateKey(symbol_stack[symbol_stack.length - 1].first, production.left))) {
+                            this.raiseError(tokenStream[i]);
+                            do {
+                                symbol_stack.pop();
+                            } while (!this.gotoTable.has(utils.generateKey(symbol_stack[symbol_stack.length - 1], token_idx)));
+                            i--;
+                            g_error_count++;
+                        }
+                        else {
+                            let goto_iter = this.gotoTable.get(utils.generateKey(symbol_stack[symbol_stack.length - 1].first, production.left));
+                            symbol_stack.push(new temp_pair(utils.parseValue(goto_iter).info, production.left));
+                            i--;
+                            let pro_left = this.symbols[production.left].id;
+                            let pro_right = [];
+                            for (let r of production.right) {
+                                pro_right.push(this.symbols[r].id);
+                            }
+                            //TODO: 语义分析
+                            outputStream += (String(++step) + ' \t ');
+                            for (let p of symbol_stack) {
+                                outputStream += '(';
+                                outputStream += String(p.first);
+                                outputStream += ',';
+                                outputStream += this.symbols[p.second].id;
+                                outputStream += ')';
+                            }
+                            outputStream += ' \t ';
+                            outputStream += pro_left;
+                            outputStream += '->';
+                            for (let m of pro_right) {
+                                outputStream += m;
+                                outputStream += ' ';
+                            }
+                            outputStream += '\n';
+                        }
+                        break;
+                    case Action.Accept:
+                        endFlag = true;
+                        break;
+                    default:
+                        //TODO: error处理
+                        endFlag = true;
+                        break;
+                }
+            }
+            if (endFlag) {
+                break;
+            }
+        }
+
+        // 将语法分析的栈写入文件
+        let path = '../result/lr1_process.dat';
+        try {
+            const data = fs.writeFileSync(path, outputStream);
+            console.log('\n语法分析的LR(1)分析过程已导出至: ' + path);
+        }
+        catch (error) {
+            console.log('\nLR(1)分析过程导出失败！');
+            console.error(error);
+            process.exit(-1);
+        }
+        return [g_error_count, s_error_count];
     }
 }
 

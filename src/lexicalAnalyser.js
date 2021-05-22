@@ -52,8 +52,9 @@ class lexicalAnalysis {
             this.sourceCode = fs.readFileSync(path, 'utf-8');
         }
         catch (err) {
-            console.log("打开源代码文件失败！");
+            console.log("\n打开源代码文件失败！");
             console.error(err);
+            process.exit(-1);
         }
     }
 
@@ -224,11 +225,12 @@ class lexicalAnalysis {
         let tokenStream_json = JSON.stringify(this.tokenStream, null, 4);
         try {
             const data = fs.writeFileSync(path, tokenStream_json);
-            console.log('词法分析生成的单词流已写入' + path);
+            console.log('\n词法分析生成的单词流已导出至: ' + path);
         }
         catch (error) {
-            console.log('将单词流写入json文件失败！');
+            console.log('\n单词流导出失败！');
             console.error(error);
+            process.exit(-1);
         }
     }
 
@@ -237,6 +239,6 @@ class lexicalAnalysis {
         return this.tokenStream;
     }
 }
-
+export { Token };
 export { lexicalAnalysis };
 

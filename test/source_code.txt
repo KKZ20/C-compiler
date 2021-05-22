@@ -1,3 +1,26 @@
+float a;     // Error 1
+int   b;
+int
+program(float a, int b, int c) {
+    int i;
+    int j;
+    i = 0;
+    if (a > (b + c)) {
+        j = (a + (b * c + 1));
+    } else {
+        j = a;
+    }
+    while (i <= 100) {  // 哈哈哈哈哈哈哈哈哈哈哈
+        i = (j * 2);
+    }
+    return i;
+}
+
+int
+demo(int a) {
+    a = a + 2;
+    return a * 2; // Error 2
+}
 
 int
 main() {

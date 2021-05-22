@@ -1,0 +1,335 @@
+步骤 	 符号栈 	 产生式 
+1 	 (0,#) 	 
+2 	 (0,#)(3,float) 	 
+3 	 (0,#)(7,Specifier) 	 Specifier->float 
+4 	 (0,#)(7,Specifier)(9,<ID>) 	 
+5 	 (0,#)(7,Specifier)(9,<ID>)(11,;) 	 
+6 	 (0,#)(6,ExtDef) 	 ExtDef->Specifier <ID> ; 
+7 	 (0,#)(6,ExtDef)(2,int) 	 
+8 	 (0,#)(6,ExtDef)(7,Specifier) 	 Specifier->int 
+9 	 (0,#)(6,ExtDef)(7,Specifier)(9,<ID>) 	 
+10 	 (0,#)(6,ExtDef)(7,Specifier)(9,<ID>)(11,;) 	 
+11 	 (0,#)(6,ExtDef)(6,ExtDef) 	 ExtDef->Specifier <ID> ; 
+12 	 (0,#)(6,ExtDef)(6,ExtDef)(2,int) 	 
+13 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier) 	 Specifier->int 
+14 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(9,<ID>) 	 
+15 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(9,<ID>)(12,CreateFunTable_m) 	 CreateFunTable_m->@ 
+16 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(9,<ID>)(12,CreateFunTable_m)(15,() 	 
+17 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(9,<ID>)(12,CreateFunTable_m)(15,()(3,float) 	 
+18 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(9,<ID>)(12,CreateFunTable_m)(15,()(18,Specifier) 	 Specifier->float 
+19 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(9,<ID>)(12,CreateFunTable_m)(15,()(18,Specifier)(24,<ID>) 	 
+20 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(9,<ID>)(12,CreateFunTable_m)(15,()(20,ParamDec) 	 ParamDec->Specifier <ID> 
+21 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(9,<ID>)(12,CreateFunTable_m)(15,()(20,ParamDec)(26,,) 	 
+22 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(9,<ID>)(12,CreateFunTable_m)(15,()(20,ParamDec)(26,,)(2,int) 	 
+23 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(9,<ID>)(12,CreateFunTable_m)(15,()(20,ParamDec)(26,,)(18,Specifier) 	 Specifier->int 
+24 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(9,<ID>)(12,CreateFunTable_m)(15,()(20,ParamDec)(26,,)(18,Specifier)(24,<ID>) 	 
+25 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(9,<ID>)(12,CreateFunTable_m)(15,()(20,ParamDec)(26,,)(20,ParamDec) 	 ParamDec->Specifier <ID> 
+26 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(9,<ID>)(12,CreateFunTable_m)(15,()(20,ParamDec)(26,,)(20,ParamDec)(26,,) 	 
+27 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(9,<ID>)(12,CreateFunTable_m)(15,()(20,ParamDec)(26,,)(20,ParamDec)(26,,)(2,int) 	 
+28 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(9,<ID>)(12,CreateFunTable_m)(15,()(20,ParamDec)(26,,)(20,ParamDec)(26,,)(18,Specifier) 	 Specifier->int 
+29 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(9,<ID>)(12,CreateFunTable_m)(15,()(20,ParamDec)(26,,)(20,ParamDec)(26,,)(18,Specifier)(24,<ID>) 	 
+30 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(9,<ID>)(12,CreateFunTable_m)(15,()(20,ParamDec)(26,,)(20,ParamDec)(26,,)(20,ParamDec) 	 ParamDec->Specifier <ID> 
+31 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(9,<ID>)(12,CreateFunTable_m)(15,()(20,ParamDec)(26,,)(20,ParamDec)(26,,)(42,VarList) 	 VarList->ParamDec 
+32 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(9,<ID>)(12,CreateFunTable_m)(15,()(20,ParamDec)(26,,)(42,VarList) 	 VarList->ParamDec , VarList 
+33 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(9,<ID>)(12,CreateFunTable_m)(15,()(19,VarList) 	 VarList->ParamDec , VarList 
+34 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(9,<ID>)(12,CreateFunTable_m)(15,()(19,VarList)(25,)) 	 
+35 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec) 	 FunDec-><ID> CreateFunTable_m ( VarList ) 
+36 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m) 	 Block_m->@ 
+37 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{) 	 
+38 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(2,int) 	 
+39 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(21,Specifier) 	 Specifier->int 
+40 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(21,Specifier)(27,<ID>) 	 
+41 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(21,Specifier)(28,Dec) 	 Dec-><ID> 
+42 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(21,Specifier)(28,Dec)(44,;) 	 
+43 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(23,Def) 	 Def->Specifier Dec ; 
+44 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(23,Def)(2,int) 	 
+45 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(23,Def)(21,Specifier) 	 Specifier->int 
+46 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(23,Def)(21,Specifier)(27,<ID>) 	 
+47 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(23,Def)(21,Specifier)(28,Dec) 	 Dec-><ID> 
+48 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(23,Def)(21,Specifier)(28,Dec)(44,;) 	 
+49 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(23,Def)(23,Def) 	 Def->Specifier Dec ; 
+50 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(23,Def)(23,Def)(41,DefList) 	 DefList->@ 
+51 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(23,Def)(41,DefList) 	 DefList->Def DefList 
+52 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList) 	 DefList->Def DefList 
+53 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(29,<ID>) 	 
+54 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(29,<ID>)(46,=) 	 
+55 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(29,<ID>)(51,Assignop) 	 Assignop->= 
+56 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(29,<ID>)(51,Assignop)(30,<INT>) 	 
+57 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(29,<ID>)(51,Assignop)(77,Exp) 	 Exp-><INT> 
+58 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(38,Exp) 	 Exp-><ID> Assignop Exp 
+59 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(38,Exp)(62,;) 	 
+60 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt) 	 Stmt->Exp ; 
+61 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if) 	 
+62 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1) 	 IfStmt_m1->@ 
+63 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,() 	 
+64 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(52,<ID>) 	 
+65 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp) 	 Exp-><ID> 
+66 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(67,>) 	 
+67 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(83,Relop) 	 Relop->> 
+68 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(83,Relop)(55,() 	 
+69 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(83,Relop)(55,()(52,<ID>) 	 
+70 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(83,Relop)(55,()(80,Exp) 	 Exp-><ID> 
+71 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(83,Relop)(55,()(80,Exp)(63,+) 	 
+72 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(83,Relop)(55,()(80,Exp)(82,Aritop) 	 Aritop->+ 
+73 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(83,Relop)(55,()(80,Exp)(82,Aritop)(52,<ID>) 	 
+74 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(83,Relop)(55,()(80,Exp)(82,Aritop)(98,Exp) 	 Exp-><ID> 
+75 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(83,Relop)(55,()(80,Exp) 	 Exp->Exp Aritop Exp 
+76 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(83,Relop)(55,()(80,Exp)(97,)) 	 
+77 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(83,Relop)(99,Exp) 	 Exp->( Exp ) 
+78 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp) 	 Exp->Exp Relop Exp 
+79 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,)) 	 
+80 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2) 	 IfStmt_m2->@ 
+81 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(123,Block_m) 	 Block_m->@ 
+82 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(123,Block_m)(129,{) 	 
+83 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(123,Block_m)(129,{)(132,DefList) 	 DefList->@ 
+84 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(123,Block_m)(129,{)(132,DefList)(29,<ID>) 	 
+85 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(123,Block_m)(129,{)(132,DefList)(29,<ID>)(46,=) 	 
+86 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(123,Block_m)(129,{)(132,DefList)(29,<ID>)(51,Assignop) 	 Assignop->= 
+87 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(123,Block_m)(129,{)(132,DefList)(29,<ID>)(51,Assignop)(32,() 	 
+88 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(123,Block_m)(129,{)(132,DefList)(29,<ID>)(51,Assignop)(32,()(52,<ID>) 	 
+89 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(123,Block_m)(129,{)(132,DefList)(29,<ID>)(51,Assignop)(32,()(56,Exp) 	 Exp-><ID> 
+90 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(123,Block_m)(129,{)(132,DefList)(29,<ID>)(51,Assignop)(32,()(56,Exp)(63,+) 	 
+91 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(123,Block_m)(129,{)(132,DefList)(29,<ID>)(51,Assignop)(32,()(56,Exp)(82,Aritop) 	 Aritop->+ 
+92 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(123,Block_m)(129,{)(132,DefList)(29,<ID>)(51,Assignop)(32,()(56,Exp)(82,Aritop)(55,() 	 
+93 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(123,Block_m)(129,{)(132,DefList)(29,<ID>)(51,Assignop)(32,()(56,Exp)(82,Aritop)(55,()(52,<ID>) 	 
+94 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(123,Block_m)(129,{)(132,DefList)(29,<ID>)(51,Assignop)(32,()(56,Exp)(82,Aritop)(55,()(80,Exp) 	 Exp-><ID> 
+95 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(123,Block_m)(129,{)(132,DefList)(29,<ID>)(51,Assignop)(32,()(56,Exp)(82,Aritop)(55,()(80,Exp)(65,*) 	 
+96 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(123,Block_m)(129,{)(132,DefList)(29,<ID>)(51,Assignop)(32,()(56,Exp)(82,Aritop)(55,()(80,Exp)(82,Aritop) 	 Aritop->* 
+97 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(123,Block_m)(129,{)(132,DefList)(29,<ID>)(51,Assignop)(32,()(56,Exp)(82,Aritop)(55,()(80,Exp)(82,Aritop)(52,<ID>) 	 
+98 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(123,Block_m)(129,{)(132,DefList)(29,<ID>)(51,Assignop)(32,()(56,Exp)(82,Aritop)(55,()(80,Exp)(82,Aritop)(98,Exp) 	 Exp-><ID> 
+99 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(123,Block_m)(129,{)(132,DefList)(29,<ID>)(51,Assignop)(32,()(56,Exp)(82,Aritop)(55,()(80,Exp) 	 Exp->Exp Aritop Exp 
+100 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(123,Block_m)(129,{)(132,DefList)(29,<ID>)(51,Assignop)(32,()(56,Exp)(82,Aritop)(55,()(80,Exp)(63,+) 	 
+101 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(123,Block_m)(129,{)(132,DefList)(29,<ID>)(51,Assignop)(32,()(56,Exp)(82,Aritop)(55,()(80,Exp)(82,Aritop) 	 Aritop->+ 
+102 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(123,Block_m)(129,{)(132,DefList)(29,<ID>)(51,Assignop)(32,()(56,Exp)(82,Aritop)(55,()(80,Exp)(82,Aritop)(53,<INT>) 	 
+103 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(123,Block_m)(129,{)(132,DefList)(29,<ID>)(51,Assignop)(32,()(56,Exp)(82,Aritop)(55,()(80,Exp)(82,Aritop)(98,Exp) 	 Exp-><INT> 
+104 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(123,Block_m)(129,{)(132,DefList)(29,<ID>)(51,Assignop)(32,()(56,Exp)(82,Aritop)(55,()(80,Exp) 	 Exp->Exp Aritop Exp 
+105 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(123,Block_m)(129,{)(132,DefList)(29,<ID>)(51,Assignop)(32,()(56,Exp)(82,Aritop)(55,()(80,Exp)(97,)) 	 
+106 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(123,Block_m)(129,{)(132,DefList)(29,<ID>)(51,Assignop)(32,()(56,Exp)(82,Aritop)(98,Exp) 	 Exp->( Exp ) 
+107 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(123,Block_m)(129,{)(132,DefList)(29,<ID>)(51,Assignop)(32,()(56,Exp) 	 Exp->Exp Aritop Exp 
+108 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(123,Block_m)(129,{)(132,DefList)(29,<ID>)(51,Assignop)(32,()(56,Exp)(81,)) 	 
+109 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(123,Block_m)(129,{)(132,DefList)(29,<ID>)(51,Assignop)(77,Exp) 	 Exp->( Exp ) 
+110 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(123,Block_m)(129,{)(132,DefList)(38,Exp) 	 Exp-><ID> Assignop Exp 
+111 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(123,Block_m)(129,{)(132,DefList)(38,Exp)(62,;) 	 
+112 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(123,Block_m)(129,{)(132,DefList)(37,Stmt) 	 Stmt->Exp ; 
+113 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(123,Block_m)(129,{)(132,DefList)(37,Stmt)(61,StmtList) 	 StmtList->@ 
+114 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(123,Block_m)(129,{)(132,DefList)(135,StmtList) 	 StmtList->Stmt StmtList 
+115 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(123,Block_m)(129,{)(132,DefList)(135,StmtList)(137,}) 	 
+116 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(122,Block) 	 Block->Block_m { DefList StmtList } 
+117 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(122,Block)(128,IfStmt_next) 	 IfStmt_next->@ 
+118 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(122,Block)(128,IfStmt_next)(131,else) 	 
+119 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(122,Block)(128,IfStmt_next)(131,else)(125,Block_m) 	 Block_m->@ 
+120 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(122,Block)(128,IfStmt_next)(131,else)(125,Block_m)(130,{) 	 
+121 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(122,Block)(128,IfStmt_next)(131,else)(125,Block_m)(130,{)(133,DefList) 	 DefList->@ 
+122 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(122,Block)(128,IfStmt_next)(131,else)(125,Block_m)(130,{)(133,DefList)(29,<ID>) 	 
+123 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(122,Block)(128,IfStmt_next)(131,else)(125,Block_m)(130,{)(133,DefList)(29,<ID>)(46,=) 	 
+124 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(122,Block)(128,IfStmt_next)(131,else)(125,Block_m)(130,{)(133,DefList)(29,<ID>)(51,Assignop) 	 Assignop->= 
+125 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(122,Block)(128,IfStmt_next)(131,else)(125,Block_m)(130,{)(133,DefList)(29,<ID>)(51,Assignop)(29,<ID>) 	 
+126 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(122,Block)(128,IfStmt_next)(131,else)(125,Block_m)(130,{)(133,DefList)(29,<ID>)(51,Assignop)(77,Exp) 	 Exp-><ID> 
+127 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(122,Block)(128,IfStmt_next)(131,else)(125,Block_m)(130,{)(133,DefList)(38,Exp) 	 Exp-><ID> Assignop Exp 
+128 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(122,Block)(128,IfStmt_next)(131,else)(125,Block_m)(130,{)(133,DefList)(38,Exp)(62,;) 	 
+129 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(122,Block)(128,IfStmt_next)(131,else)(125,Block_m)(130,{)(133,DefList)(37,Stmt) 	 Stmt->Exp ; 
+130 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(122,Block)(128,IfStmt_next)(131,else)(125,Block_m)(130,{)(133,DefList)(37,Stmt)(61,StmtList) 	 StmtList->@ 
+131 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(122,Block)(128,IfStmt_next)(131,else)(125,Block_m)(130,{)(133,DefList)(136,StmtList) 	 StmtList->Stmt StmtList 
+132 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(122,Block)(128,IfStmt_next)(131,else)(125,Block_m)(130,{)(133,DefList)(136,StmtList)(138,}) 	 
+133 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(122,Block)(128,IfStmt_next)(131,else)(134,Block) 	 Block->Block_m { DefList StmtList } 
+134 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(34,if)(58,IfStmt_m1)(85,()(100,Exp)(110,))(119,IfStmt_m2)(122,Block)(127,IfNext) 	 IfNext->IfStmt_next else Block 
+135 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(39,IfStmt) 	 IfStmt->if IfStmt_m1 ( Exp ) IfStmt_m2 Block IfNext 
+136 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt) 	 Stmt->IfStmt 
+137 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt)(35,while) 	 
+138 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt)(35,while)(59,WhileStmt_m1) 	 WhileStmt_m1->@ 
+139 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt)(35,while)(59,WhileStmt_m1)(86,() 	 
+140 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt)(35,while)(59,WhileStmt_m1)(86,()(52,<ID>) 	 
+141 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt)(35,while)(59,WhileStmt_m1)(86,()(101,Exp) 	 Exp-><ID> 
+142 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt)(35,while)(59,WhileStmt_m1)(86,()(101,Exp)(70,<=) 	 
+143 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt)(35,while)(59,WhileStmt_m1)(86,()(101,Exp)(83,Relop) 	 Relop-><= 
+144 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt)(35,while)(59,WhileStmt_m1)(86,()(101,Exp)(83,Relop)(53,<INT>) 	 
+145 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt)(35,while)(59,WhileStmt_m1)(86,()(101,Exp)(83,Relop)(99,Exp) 	 Exp-><INT> 
+146 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt)(35,while)(59,WhileStmt_m1)(86,()(101,Exp) 	 Exp->Exp Relop Exp 
+147 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt)(35,while)(59,WhileStmt_m1)(86,()(101,Exp)(111,)) 	 
+148 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt)(35,while)(59,WhileStmt_m1)(86,()(101,Exp)(111,))(120,WhileStmt_m2) 	 WhileStmt_m2->@ 
+149 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt)(35,while)(59,WhileStmt_m1)(86,()(101,Exp)(111,))(120,WhileStmt_m2)(125,Block_m) 	 Block_m->@ 
+150 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt)(35,while)(59,WhileStmt_m1)(86,()(101,Exp)(111,))(120,WhileStmt_m2)(125,Block_m)(130,{) 	 
+151 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt)(35,while)(59,WhileStmt_m1)(86,()(101,Exp)(111,))(120,WhileStmt_m2)(125,Block_m)(130,{)(133,DefList) 	 DefList->@ 
+152 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt)(35,while)(59,WhileStmt_m1)(86,()(101,Exp)(111,))(120,WhileStmt_m2)(125,Block_m)(130,{)(133,DefList)(29,<ID>) 	 
+153 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt)(35,while)(59,WhileStmt_m1)(86,()(101,Exp)(111,))(120,WhileStmt_m2)(125,Block_m)(130,{)(133,DefList)(29,<ID>)(46,=) 	 
+154 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt)(35,while)(59,WhileStmt_m1)(86,()(101,Exp)(111,))(120,WhileStmt_m2)(125,Block_m)(130,{)(133,DefList)(29,<ID>)(51,Assignop) 	 Assignop->= 
+155 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt)(35,while)(59,WhileStmt_m1)(86,()(101,Exp)(111,))(120,WhileStmt_m2)(125,Block_m)(130,{)(133,DefList)(29,<ID>)(51,Assignop)(32,() 	 
+156 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt)(35,while)(59,WhileStmt_m1)(86,()(101,Exp)(111,))(120,WhileStmt_m2)(125,Block_m)(130,{)(133,DefList)(29,<ID>)(51,Assignop)(32,()(52,<ID>) 	 
+157 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt)(35,while)(59,WhileStmt_m1)(86,()(101,Exp)(111,))(120,WhileStmt_m2)(125,Block_m)(130,{)(133,DefList)(29,<ID>)(51,Assignop)(32,()(56,Exp) 	 Exp-><ID> 
+158 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt)(35,while)(59,WhileStmt_m1)(86,()(101,Exp)(111,))(120,WhileStmt_m2)(125,Block_m)(130,{)(133,DefList)(29,<ID>)(51,Assignop)(32,()(56,Exp)(65,*) 	 
+159 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt)(35,while)(59,WhileStmt_m1)(86,()(101,Exp)(111,))(120,WhileStmt_m2)(125,Block_m)(130,{)(133,DefList)(29,<ID>)(51,Assignop)(32,()(56,Exp)(82,Aritop) 	 Aritop->* 
+160 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt)(35,while)(59,WhileStmt_m1)(86,()(101,Exp)(111,))(120,WhileStmt_m2)(125,Block_m)(130,{)(133,DefList)(29,<ID>)(51,Assignop)(32,()(56,Exp)(82,Aritop)(53,<INT>) 	 
+161 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt)(35,while)(59,WhileStmt_m1)(86,()(101,Exp)(111,))(120,WhileStmt_m2)(125,Block_m)(130,{)(133,DefList)(29,<ID>)(51,Assignop)(32,()(56,Exp)(82,Aritop)(98,Exp) 	 Exp-><INT> 
+162 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt)(35,while)(59,WhileStmt_m1)(86,()(101,Exp)(111,))(120,WhileStmt_m2)(125,Block_m)(130,{)(133,DefList)(29,<ID>)(51,Assignop)(32,()(56,Exp) 	 Exp->Exp Aritop Exp 
+163 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt)(35,while)(59,WhileStmt_m1)(86,()(101,Exp)(111,))(120,WhileStmt_m2)(125,Block_m)(130,{)(133,DefList)(29,<ID>)(51,Assignop)(32,()(56,Exp)(81,)) 	 
+164 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt)(35,while)(59,WhileStmt_m1)(86,()(101,Exp)(111,))(120,WhileStmt_m2)(125,Block_m)(130,{)(133,DefList)(29,<ID>)(51,Assignop)(77,Exp) 	 Exp->( Exp ) 
+165 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt)(35,while)(59,WhileStmt_m1)(86,()(101,Exp)(111,))(120,WhileStmt_m2)(125,Block_m)(130,{)(133,DefList)(38,Exp) 	 Exp-><ID> Assignop Exp 
+166 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt)(35,while)(59,WhileStmt_m1)(86,()(101,Exp)(111,))(120,WhileStmt_m2)(125,Block_m)(130,{)(133,DefList)(38,Exp)(62,;) 	 
+167 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt)(35,while)(59,WhileStmt_m1)(86,()(101,Exp)(111,))(120,WhileStmt_m2)(125,Block_m)(130,{)(133,DefList)(37,Stmt) 	 Stmt->Exp ; 
+168 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt)(35,while)(59,WhileStmt_m1)(86,()(101,Exp)(111,))(120,WhileStmt_m2)(125,Block_m)(130,{)(133,DefList)(37,Stmt)(61,StmtList) 	 StmtList->@ 
+169 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt)(35,while)(59,WhileStmt_m1)(86,()(101,Exp)(111,))(120,WhileStmt_m2)(125,Block_m)(130,{)(133,DefList)(136,StmtList) 	 StmtList->Stmt StmtList 
+170 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt)(35,while)(59,WhileStmt_m1)(86,()(101,Exp)(111,))(120,WhileStmt_m2)(125,Block_m)(130,{)(133,DefList)(136,StmtList)(138,}) 	 
+171 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt)(35,while)(59,WhileStmt_m1)(86,()(101,Exp)(111,))(120,WhileStmt_m2)(124,Block) 	 Block->Block_m { DefList StmtList } 
+172 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt)(40,WhileStmt) 	 WhileStmt->while WhileStmt_m1 ( Exp ) WhileStmt_m2 Block 
+173 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt)(37,Stmt) 	 Stmt->WhileStmt 
+174 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt)(37,Stmt)(33,return) 	 
+175 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt)(37,Stmt)(33,return)(29,<ID>) 	 
+176 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt)(37,Stmt)(33,return)(57,Exp) 	 Exp-><ID> 
+177 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt)(37,Stmt)(33,return)(57,Exp)(84,;) 	 
+178 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt)(37,Stmt)(37,Stmt) 	 Stmt->return Exp ; 
+179 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt)(37,Stmt)(37,Stmt)(61,StmtList) 	 StmtList->@ 
+180 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt)(37,Stmt)(61,StmtList) 	 StmtList->Stmt StmtList 
+181 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt)(61,StmtList) 	 StmtList->Stmt StmtList 
+182 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(61,StmtList) 	 StmtList->Stmt StmtList 
+183 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(36,StmtList) 	 StmtList->Stmt StmtList 
+184 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(36,StmtList)(60,}) 	 
+185 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(13,Block) 	 Block->Block_m { DefList StmtList } 
+186 	 (0,#)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(13,Block)(16,ExitFunTable_m) 	 ExitFunTable_m->@ 
+187 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef) 	 ExtDef->Specifier FunDec Block ExitFunTable_m 
+188 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(2,int) 	 
+189 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier) 	 Specifier->int 
+190 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(9,<ID>) 	 
+191 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(9,<ID>)(12,CreateFunTable_m) 	 CreateFunTable_m->@ 
+192 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(9,<ID>)(12,CreateFunTable_m)(15,() 	 
+193 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(9,<ID>)(12,CreateFunTable_m)(15,()(2,int) 	 
+194 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(9,<ID>)(12,CreateFunTable_m)(15,()(18,Specifier) 	 Specifier->int 
+195 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(9,<ID>)(12,CreateFunTable_m)(15,()(18,Specifier)(24,<ID>) 	 
+196 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(9,<ID>)(12,CreateFunTable_m)(15,()(20,ParamDec) 	 ParamDec->Specifier <ID> 
+197 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(9,<ID>)(12,CreateFunTable_m)(15,()(19,VarList) 	 VarList->ParamDec 
+198 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(9,<ID>)(12,CreateFunTable_m)(15,()(19,VarList)(25,)) 	 
+199 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec) 	 FunDec-><ID> CreateFunTable_m ( VarList ) 
+200 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m) 	 Block_m->@ 
+201 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{) 	 
+202 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList) 	 DefList->@ 
+203 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(29,<ID>) 	 
+204 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(29,<ID>)(46,=) 	 
+205 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(29,<ID>)(51,Assignop) 	 Assignop->= 
+206 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(29,<ID>)(51,Assignop)(29,<ID>) 	 
+207 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(29,<ID>)(51,Assignop)(77,Exp) 	 Exp-><ID> 
+208 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(38,Exp) 	 Exp-><ID> Assignop Exp 
+209 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(38,Exp)(63,+) 	 
+210 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(38,Exp)(73,Aritop) 	 Aritop->+ 
+211 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(38,Exp)(73,Aritop)(30,<INT>) 	 
+212 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(38,Exp)(73,Aritop)(87,Exp) 	 Exp-><INT> 
+213 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(38,Exp) 	 Exp->Exp Aritop Exp 
+214 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(38,Exp)(62,;) 	 
+215 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt) 	 Stmt->Exp ; 
+216 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(33,return) 	 
+217 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(33,return)(29,<ID>) 	 
+218 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(33,return)(57,Exp) 	 Exp-><ID> 
+219 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(33,return)(57,Exp)(65,*) 	 
+220 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(33,return)(57,Exp)(73,Aritop) 	 Aritop->* 
+221 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(33,return)(57,Exp)(73,Aritop)(30,<INT>) 	 
+222 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(33,return)(57,Exp)(73,Aritop)(87,Exp) 	 Exp-><INT> 
+223 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(33,return)(57,Exp) 	 Exp->Exp Aritop Exp 
+224 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(33,return)(57,Exp)(84,;) 	 
+225 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt) 	 Stmt->return Exp ; 
+226 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt)(61,StmtList) 	 StmtList->@ 
+227 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(61,StmtList) 	 StmtList->Stmt StmtList 
+228 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(36,StmtList) 	 StmtList->Stmt StmtList 
+229 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(36,StmtList)(60,}) 	 
+230 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(13,Block) 	 Block->Block_m { DefList StmtList } 
+231 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(13,Block)(16,ExitFunTable_m) 	 ExitFunTable_m->@ 
+232 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef) 	 ExtDef->Specifier FunDec Block ExitFunTable_m 
+233 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(2,int) 	 
+234 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier) 	 Specifier->int 
+235 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(9,<ID>) 	 
+236 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(9,<ID>)(12,CreateFunTable_m) 	 CreateFunTable_m->@ 
+237 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(9,<ID>)(12,CreateFunTable_m)(15,() 	 
+238 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(9,<ID>)(12,CreateFunTable_m)(15,()(19,VarList) 	 VarList->@ 
+239 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(9,<ID>)(12,CreateFunTable_m)(15,()(19,VarList)(25,)) 	 
+240 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec) 	 FunDec-><ID> CreateFunTable_m ( VarList ) 
+241 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m) 	 Block_m->@ 
+242 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{) 	 
+243 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(3,float) 	 
+244 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(21,Specifier) 	 Specifier->float 
+245 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(21,Specifier)(27,<ID>) 	 
+246 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(21,Specifier)(27,<ID>)(43,=) 	 
+247 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(21,Specifier)(27,<ID>)(43,=)(31,<FLOAT>) 	 
+248 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(21,Specifier)(27,<ID>)(43,=)(75,Exp) 	 Exp-><FLOAT> 
+249 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(21,Specifier)(28,Dec) 	 Dec-><ID> = Exp 
+250 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(21,Specifier)(28,Dec)(44,;) 	 
+251 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(23,Def) 	 Def->Specifier Dec ; 
+252 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(23,Def)(2,int) 	 
+253 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(23,Def)(21,Specifier) 	 Specifier->int 
+254 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(23,Def)(21,Specifier)(27,<ID>) 	 
+255 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(23,Def)(21,Specifier)(27,<ID>)(43,=) 	 
+256 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(23,Def)(21,Specifier)(27,<ID>)(43,=)(30,<INT>) 	 
+257 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(23,Def)(21,Specifier)(27,<ID>)(43,=)(75,Exp) 	 Exp-><INT> 
+258 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(23,Def)(21,Specifier)(28,Dec) 	 Dec-><ID> = Exp 
+259 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(23,Def)(21,Specifier)(28,Dec)(44,;) 	 
+260 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(23,Def)(23,Def) 	 Def->Specifier Dec ; 
+261 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(23,Def)(23,Def)(2,int) 	 
+262 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(23,Def)(23,Def)(21,Specifier) 	 Specifier->int 
+263 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(23,Def)(23,Def)(21,Specifier)(27,<ID>) 	 
+264 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(23,Def)(23,Def)(21,Specifier)(27,<ID>)(43,=) 	 
+265 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(23,Def)(23,Def)(21,Specifier)(27,<ID>)(43,=)(30,<INT>) 	 
+266 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(23,Def)(23,Def)(21,Specifier)(27,<ID>)(43,=)(75,Exp) 	 Exp-><INT> 
+267 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(23,Def)(23,Def)(21,Specifier)(28,Dec) 	 Dec-><ID> = Exp 
+268 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(23,Def)(23,Def)(21,Specifier)(28,Dec)(44,;) 	 
+269 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(23,Def)(23,Def)(23,Def) 	 Def->Specifier Dec ; 
+270 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(23,Def)(23,Def)(23,Def)(41,DefList) 	 DefList->@ 
+271 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(23,Def)(23,Def)(41,DefList) 	 DefList->Def DefList 
+272 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(23,Def)(41,DefList) 	 DefList->Def DefList 
+273 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList) 	 DefList->Def DefList 
+274 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(29,<ID>) 	 
+275 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(29,<ID>)(46,=) 	 
+276 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(29,<ID>)(51,Assignop) 	 Assignop->= 
+277 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(29,<ID>)(51,Assignop)(29,<ID>) 	 
+278 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(29,<ID>)(51,Assignop)(77,Exp) 	 Exp-><ID> 
+279 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(38,Exp) 	 Exp-><ID> Assignop Exp 
+280 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(38,Exp)(63,+) 	 
+281 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(38,Exp)(73,Aritop) 	 Aritop->+ 
+282 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(38,Exp)(73,Aritop)(29,<ID>) 	 
+283 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(38,Exp)(73,Aritop)(87,Exp) 	 Exp-><ID> 
+284 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(38,Exp) 	 Exp->Exp Aritop Exp 
+285 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(38,Exp)(62,;) 	 
+286 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt) 	 Stmt->Exp ; 
+287 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(29,<ID>) 	 
+288 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(29,<ID>)(46,=) 	 
+289 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(29,<ID>)(51,Assignop) 	 Assignop->= 
+290 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(29,<ID>)(51,Assignop)(29,<ID>) 	 
+291 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(29,<ID>)(51,Assignop)(29,<ID>)(45,() 	 
+292 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(29,<ID>)(51,Assignop)(29,<ID>)(45,()(76,CallFunCheck) 	 CallFunCheck->@ 
+293 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(29,<ID>)(51,Assignop)(29,<ID>)(45,()(76,CallFunCheck)(89,<ID>) 	 
+294 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(29,<ID>)(51,Assignop)(29,<ID>)(45,()(76,CallFunCheck)(93,Exp) 	 Exp-><ID> 
+295 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(29,<ID>)(51,Assignop)(29,<ID>)(45,()(76,CallFunCheck)(93,Exp)(105,,) 	 
+296 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(29,<ID>)(51,Assignop)(29,<ID>)(45,()(76,CallFunCheck)(93,Exp)(105,,)(89,<ID>) 	 
+297 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(29,<ID>)(51,Assignop)(29,<ID>)(45,()(76,CallFunCheck)(93,Exp)(105,,)(93,Exp) 	 Exp-><ID> 
+298 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(29,<ID>)(51,Assignop)(29,<ID>)(45,()(76,CallFunCheck)(93,Exp)(105,,)(93,Exp)(105,,) 	 
+299 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(29,<ID>)(51,Assignop)(29,<ID>)(45,()(76,CallFunCheck)(93,Exp)(105,,)(93,Exp)(105,,)(89,<ID>) 	 
+300 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(29,<ID>)(51,Assignop)(29,<ID>)(45,()(76,CallFunCheck)(93,Exp)(105,,)(93,Exp)(105,,)(89,<ID>)(102,() 	 
+301 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(29,<ID>)(51,Assignop)(29,<ID>)(45,()(76,CallFunCheck)(93,Exp)(105,,)(93,Exp)(105,,)(89,<ID>)(102,()(112,CallFunCheck) 	 CallFunCheck->@ 
+302 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(29,<ID>)(51,Assignop)(29,<ID>)(45,()(76,CallFunCheck)(93,Exp)(105,,)(93,Exp)(105,,)(89,<ID>)(102,()(112,CallFunCheck)(89,<ID>) 	 
+303 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(29,<ID>)(51,Assignop)(29,<ID>)(45,()(76,CallFunCheck)(93,Exp)(105,,)(93,Exp)(105,,)(89,<ID>)(102,()(112,CallFunCheck)(93,Exp) 	 Exp-><ID> 
+304 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(29,<ID>)(51,Assignop)(29,<ID>)(45,()(76,CallFunCheck)(93,Exp)(105,,)(93,Exp)(105,,)(89,<ID>)(102,()(112,CallFunCheck)(121,Args) 	 Args->Exp 
+305 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(29,<ID>)(51,Assignop)(29,<ID>)(45,()(76,CallFunCheck)(93,Exp)(105,,)(93,Exp)(105,,)(89,<ID>)(102,()(112,CallFunCheck)(121,Args)(126,)) 	 
+306 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(29,<ID>)(51,Assignop)(29,<ID>)(45,()(76,CallFunCheck)(93,Exp)(105,,)(93,Exp)(105,,)(93,Exp) 	 Exp-><ID> ( CallFunCheck Args ) 
+307 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(29,<ID>)(51,Assignop)(29,<ID>)(45,()(76,CallFunCheck)(93,Exp)(105,,)(93,Exp)(105,,)(115,Args) 	 Args->Exp 
+308 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(29,<ID>)(51,Assignop)(29,<ID>)(45,()(76,CallFunCheck)(93,Exp)(105,,)(115,Args) 	 Args->Exp , Args 
+309 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(29,<ID>)(51,Assignop)(29,<ID>)(45,()(76,CallFunCheck)(94,Args) 	 Args->Exp , Args 
+310 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(29,<ID>)(51,Assignop)(29,<ID>)(45,()(76,CallFunCheck)(94,Args)(108,)) 	 
+311 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(29,<ID>)(51,Assignop)(77,Exp) 	 Exp-><ID> ( CallFunCheck Args ) 
+312 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(38,Exp) 	 Exp-><ID> Assignop Exp 
+313 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(38,Exp)(62,;) 	 
+314 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt) 	 Stmt->Exp ; 
+315 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt)(33,return) 	 
+316 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt)(33,return)(30,<INT>) 	 
+317 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt)(33,return)(57,Exp) 	 Exp-><INT> 
+318 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt)(33,return)(57,Exp)(84,;) 	 
+319 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt)(37,Stmt) 	 Stmt->return Exp ; 
+320 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt)(37,Stmt)(61,StmtList) 	 StmtList->@ 
+321 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(37,Stmt)(61,StmtList) 	 StmtList->Stmt StmtList 
+322 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(37,Stmt)(61,StmtList) 	 StmtList->Stmt StmtList 
+323 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(36,StmtList) 	 StmtList->Stmt StmtList 
+324 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(14,Block_m)(17,{)(22,DefList)(36,StmtList)(60,}) 	 
+325 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(13,Block) 	 Block->Block_m { DefList StmtList } 
+326 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(7,Specifier)(10,FunDec)(13,Block)(16,ExitFunTable_m) 	 ExitFunTable_m->@ 
+327 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef) 	 ExtDef->Specifier FunDec Block ExitFunTable_m 
+328 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(8,ExtDefList) 	 ExtDefList->@ 
+329 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(6,ExtDef)(8,ExtDefList) 	 ExtDefList->ExtDef ExtDefList 
+330 	 (0,#)(6,ExtDef)(6,ExtDef)(6,ExtDef)(8,ExtDefList) 	 ExtDefList->ExtDef ExtDefList 
+331 	 (0,#)(6,ExtDef)(6,ExtDef)(8,ExtDefList) 	 ExtDefList->ExtDef ExtDefList 
+332 	 (0,#)(6,ExtDef)(8,ExtDefList) 	 ExtDefList->ExtDef ExtDefList 
+333 	 (0,#)(5,ExtDefList) 	 ExtDefList->ExtDef ExtDefList 
+334 	 (0,#)(4,Program) 	 Program->ExtDefList 

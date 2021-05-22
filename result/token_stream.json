@@ -1,27 +1,32 @@
 [
     {
-        "token": "int",
-        "value": "int",
+        "token": "float",
+        "value": "float",
         "row_no": 1
     },
     {
         "token": "<ID>",
-        "value": "main",
+        "value": "a",
         "row_no": 1
     },
     {
-        "token": "(",
-        "value": "(",
+        "token": ";",
+        "value": ";",
         "row_no": 1
     },
     {
-        "token": ")",
-        "value": ")",
-        "row_no": 1
+        "token": "int",
+        "value": "int",
+        "row_no": 2
     },
     {
-        "token": "{",
-        "value": "{",
+        "token": "<ID>",
+        "value": "b",
+        "row_no": 2
+    },
+    {
+        "token": ";",
+        "value": ";",
         "row_no": 2
     },
     {
@@ -31,152 +36,87 @@
     },
     {
         "token": "<ID>",
-        "value": "a",
-        "row_no": 3
-    },
-    {
-        "token": "=",
-        "value": "=",
-        "row_no": 3
-    },
-    {
-        "token": "<INT>",
-        "value": "3",
-        "row_no": 3
-    },
-    {
-        "token": "||",
-        "value": "||",
-        "row_no": 3
-    },
-    {
-        "token": "*",
-        "value": "*",
-        "row_no": 3
-    },
-    {
-        "token": "<INT>",
-        "value": "4",
-        "row_no": 3
-    },
-    {
-        "token": ";",
-        "value": ";",
-        "row_no": 3
-    },
-    {
-        "token": "int",
-        "value": "int",
-        "row_no": 4
-    },
-    {
-        "token": "<ID>",
-        "value": "b",
-        "row_no": 4
-    },
-    {
-        "token": "=",
-        "value": "=",
-        "row_no": 4
-    },
-    {
-        "token": "<INT>",
-        "value": "4",
-        "row_no": 4
-    },
-    {
-        "token": ";",
-        "value": ";",
-        "row_no": 4
-    },
-    {
-        "token": "int",
-        "value": "int",
-        "row_no": 5
-    },
-    {
-        "token": "<ID>",
-        "value": "c",
-        "row_no": 5
-    },
-    {
-        "token": "=",
-        "value": "=",
-        "row_no": 5
-    },
-    {
-        "token": "<INT>",
-        "value": "2",
-        "row_no": 5
-    },
-    {
-        "token": ";",
-        "value": ";",
-        "row_no": 5
-    },
-    {
-        "token": "<ID>",
-        "value": "a",
-        "row_no": 6
-    },
-    {
-        "token": "=",
-        "value": "=",
-        "row_no": 6
-    },
-    {
-        "token": "<ID>",
         "value": "program",
-        "row_no": 6
+        "row_no": 4
     },
     {
         "token": "(",
         "value": "(",
-        "row_no": 6
+        "row_no": 4
+    },
+    {
+        "token": "float",
+        "value": "float",
+        "row_no": 4
     },
     {
         "token": "<ID>",
         "value": "a",
-        "row_no": 6
+        "row_no": 4
     },
     {
         "token": ",",
         "value": ",",
-        "row_no": 6
+        "row_no": 4
+    },
+    {
+        "token": "int",
+        "value": "int",
+        "row_no": 4
     },
     {
         "token": "<ID>",
         "value": "b",
-        "row_no": 6
+        "row_no": 4
     },
     {
         "token": ",",
         "value": ",",
-        "row_no": 6
+        "row_no": 4
     },
     {
-        "token": "<ID>",
-        "value": "demo",
-        "row_no": 6
-    },
-    {
-        "token": "(",
-        "value": "(",
-        "row_no": 6
+        "token": "int",
+        "value": "int",
+        "row_no": 4
     },
     {
         "token": "<ID>",
         "value": "c",
-        "row_no": 6
+        "row_no": 4
     },
     {
         "token": ")",
         "value": ")",
+        "row_no": 4
+    },
+    {
+        "token": "{",
+        "value": "{",
+        "row_no": 4
+    },
+    {
+        "token": "int",
+        "value": "int",
+        "row_no": 5
+    },
+    {
+        "token": "<ID>",
+        "value": "i",
+        "row_no": 5
+    },
+    {
+        "token": ";",
+        "value": ";",
+        "row_no": 5
+    },
+    {
+        "token": "int",
+        "value": "int",
         "row_no": 6
     },
     {
-        "token": ")",
-        "value": ")",
+        "token": "<ID>",
+        "value": "j",
         "row_no": 6
     },
     {
@@ -185,8 +125,13 @@
         "row_no": 6
     },
     {
-        "token": "return",
-        "value": "return",
+        "token": "<ID>",
+        "value": "i",
+        "row_no": 7
+    },
+    {
+        "token": "=",
+        "value": "=",
         "row_no": 7
     },
     {
@@ -200,18 +145,583 @@
         "row_no": 7
     },
     {
-        "token": "}",
-        "value": "}",
+        "token": "if",
+        "value": "if",
         "row_no": 8
     },
     {
-        "token": "<INT>",
-        "value": "123",
+        "token": "(",
+        "value": "(",
         "row_no": 8
     },
     {
         "token": "<ID>",
         "value": "a",
         "row_no": 8
+    },
+    {
+        "token": ">",
+        "value": ">",
+        "row_no": 8
+    },
+    {
+        "token": "(",
+        "value": "(",
+        "row_no": 8
+    },
+    {
+        "token": "<ID>",
+        "value": "b",
+        "row_no": 8
+    },
+    {
+        "token": "+",
+        "value": "+",
+        "row_no": 8
+    },
+    {
+        "token": "<ID>",
+        "value": "c",
+        "row_no": 8
+    },
+    {
+        "token": ")",
+        "value": ")",
+        "row_no": 8
+    },
+    {
+        "token": ")",
+        "value": ")",
+        "row_no": 8
+    },
+    {
+        "token": "{",
+        "value": "{",
+        "row_no": 8
+    },
+    {
+        "token": "<ID>",
+        "value": "j",
+        "row_no": 9
+    },
+    {
+        "token": "=",
+        "value": "=",
+        "row_no": 9
+    },
+    {
+        "token": "(",
+        "value": "(",
+        "row_no": 9
+    },
+    {
+        "token": "<ID>",
+        "value": "a",
+        "row_no": 9
+    },
+    {
+        "token": "+",
+        "value": "+",
+        "row_no": 9
+    },
+    {
+        "token": "(",
+        "value": "(",
+        "row_no": 9
+    },
+    {
+        "token": "<ID>",
+        "value": "b",
+        "row_no": 9
+    },
+    {
+        "token": "*",
+        "value": "*",
+        "row_no": 9
+    },
+    {
+        "token": "<ID>",
+        "value": "c",
+        "row_no": 9
+    },
+    {
+        "token": "+",
+        "value": "+",
+        "row_no": 9
+    },
+    {
+        "token": "<INT>",
+        "value": "1",
+        "row_no": 9
+    },
+    {
+        "token": ")",
+        "value": ")",
+        "row_no": 9
+    },
+    {
+        "token": ")",
+        "value": ")",
+        "row_no": 9
+    },
+    {
+        "token": ";",
+        "value": ";",
+        "row_no": 9
+    },
+    {
+        "token": "}",
+        "value": "}",
+        "row_no": 10
+    },
+    {
+        "token": "else",
+        "value": "else",
+        "row_no": 10
+    },
+    {
+        "token": "{",
+        "value": "{",
+        "row_no": 10
+    },
+    {
+        "token": "<ID>",
+        "value": "j",
+        "row_no": 11
+    },
+    {
+        "token": "=",
+        "value": "=",
+        "row_no": 11
+    },
+    {
+        "token": "<ID>",
+        "value": "a",
+        "row_no": 11
+    },
+    {
+        "token": ";",
+        "value": ";",
+        "row_no": 11
+    },
+    {
+        "token": "}",
+        "value": "}",
+        "row_no": 12
+    },
+    {
+        "token": "while",
+        "value": "while",
+        "row_no": 13
+    },
+    {
+        "token": "(",
+        "value": "(",
+        "row_no": 13
+    },
+    {
+        "token": "<ID>",
+        "value": "i",
+        "row_no": 13
+    },
+    {
+        "token": "<=",
+        "value": "<=",
+        "row_no": 13
+    },
+    {
+        "token": "<INT>",
+        "value": "100",
+        "row_no": 13
+    },
+    {
+        "token": ")",
+        "value": ")",
+        "row_no": 13
+    },
+    {
+        "token": "{",
+        "value": "{",
+        "row_no": 13
+    },
+    {
+        "token": "<ID>",
+        "value": "i",
+        "row_no": 14
+    },
+    {
+        "token": "=",
+        "value": "=",
+        "row_no": 14
+    },
+    {
+        "token": "(",
+        "value": "(",
+        "row_no": 14
+    },
+    {
+        "token": "<ID>",
+        "value": "j",
+        "row_no": 14
+    },
+    {
+        "token": "*",
+        "value": "*",
+        "row_no": 14
+    },
+    {
+        "token": "<INT>",
+        "value": "2",
+        "row_no": 14
+    },
+    {
+        "token": ")",
+        "value": ")",
+        "row_no": 14
+    },
+    {
+        "token": ";",
+        "value": ";",
+        "row_no": 14
+    },
+    {
+        "token": "}",
+        "value": "}",
+        "row_no": 15
+    },
+    {
+        "token": "return",
+        "value": "return",
+        "row_no": 16
+    },
+    {
+        "token": "<ID>",
+        "value": "i",
+        "row_no": 16
+    },
+    {
+        "token": ";",
+        "value": ";",
+        "row_no": 16
+    },
+    {
+        "token": "}",
+        "value": "}",
+        "row_no": 17
+    },
+    {
+        "token": "int",
+        "value": "int",
+        "row_no": 19
+    },
+    {
+        "token": "<ID>",
+        "value": "demo",
+        "row_no": 20
+    },
+    {
+        "token": "(",
+        "value": "(",
+        "row_no": 20
+    },
+    {
+        "token": "int",
+        "value": "int",
+        "row_no": 20
+    },
+    {
+        "token": "<ID>",
+        "value": "a",
+        "row_no": 20
+    },
+    {
+        "token": ")",
+        "value": ")",
+        "row_no": 20
+    },
+    {
+        "token": "{",
+        "value": "{",
+        "row_no": 20
+    },
+    {
+        "token": "<ID>",
+        "value": "a",
+        "row_no": 21
+    },
+    {
+        "token": "=",
+        "value": "=",
+        "row_no": 21
+    },
+    {
+        "token": "<ID>",
+        "value": "a",
+        "row_no": 21
+    },
+    {
+        "token": "+",
+        "value": "+",
+        "row_no": 21
+    },
+    {
+        "token": "<INT>",
+        "value": "2",
+        "row_no": 21
+    },
+    {
+        "token": ";",
+        "value": ";",
+        "row_no": 21
+    },
+    {
+        "token": "return",
+        "value": "return",
+        "row_no": 22
+    },
+    {
+        "token": "<ID>",
+        "value": "a",
+        "row_no": 22
+    },
+    {
+        "token": "*",
+        "value": "*",
+        "row_no": 22
+    },
+    {
+        "token": "<INT>",
+        "value": "2",
+        "row_no": 22
+    },
+    {
+        "token": ";",
+        "value": ";",
+        "row_no": 22
+    },
+    {
+        "token": "}",
+        "value": "}",
+        "row_no": 23
+    },
+    {
+        "token": "int",
+        "value": "int",
+        "row_no": 25
+    },
+    {
+        "token": "<ID>",
+        "value": "main",
+        "row_no": 26
+    },
+    {
+        "token": "(",
+        "value": "(",
+        "row_no": 26
+    },
+    {
+        "token": ")",
+        "value": ")",
+        "row_no": 26
+    },
+    {
+        "token": "{",
+        "value": "{",
+        "row_no": 26
+    },
+    {
+        "token": "float",
+        "value": "float",
+        "row_no": 31
+    },
+    {
+        "token": "<ID>",
+        "value": "a",
+        "row_no": 31
+    },
+    {
+        "token": "=",
+        "value": "=",
+        "row_no": 31
+    },
+    {
+        "token": "<FLOAT>",
+        "value": "12.98",
+        "row_no": 31
+    },
+    {
+        "token": ";",
+        "value": ";",
+        "row_no": 31
+    },
+    {
+        "token": "int",
+        "value": "int",
+        "row_no": 32
+    },
+    {
+        "token": "<ID>",
+        "value": "b",
+        "row_no": 32
+    },
+    {
+        "token": "=",
+        "value": "=",
+        "row_no": 32
+    },
+    {
+        "token": "<INT>",
+        "value": "3",
+        "row_no": 32
+    },
+    {
+        "token": ";",
+        "value": ";",
+        "row_no": 32
+    },
+    {
+        "token": "int",
+        "value": "int",
+        "row_no": 33
+    },
+    {
+        "token": "<ID>",
+        "value": "c",
+        "row_no": 33
+    },
+    {
+        "token": "=",
+        "value": "=",
+        "row_no": 33
+    },
+    {
+        "token": "<INT>",
+        "value": "4",
+        "row_no": 33
+    },
+    {
+        "token": ";",
+        "value": ";",
+        "row_no": 33
+    },
+    {
+        "token": "<ID>",
+        "value": "a",
+        "row_no": 34
+    },
+    {
+        "token": "=",
+        "value": "=",
+        "row_no": 34
+    },
+    {
+        "token": "<ID>",
+        "value": "b",
+        "row_no": 34
+    },
+    {
+        "token": "+",
+        "value": "+",
+        "row_no": 34
+    },
+    {
+        "token": "<ID>",
+        "value": "c",
+        "row_no": 34
+    },
+    {
+        "token": ";",
+        "value": ";",
+        "row_no": 34
+    },
+    {
+        "token": "<ID>",
+        "value": "c",
+        "row_no": 35
+    },
+    {
+        "token": "=",
+        "value": "=",
+        "row_no": 35
+    },
+    {
+        "token": "<ID>",
+        "value": "program",
+        "row_no": 35
+    },
+    {
+        "token": "(",
+        "value": "(",
+        "row_no": 35
+    },
+    {
+        "token": "<ID>",
+        "value": "a",
+        "row_no": 35
+    },
+    {
+        "token": ",",
+        "value": ",",
+        "row_no": 35
+    },
+    {
+        "token": "<ID>",
+        "value": "b",
+        "row_no": 35
+    },
+    {
+        "token": ",",
+        "value": ",",
+        "row_no": 35
+    },
+    {
+        "token": "<ID>",
+        "value": "demo",
+        "row_no": 35
+    },
+    {
+        "token": "(",
+        "value": "(",
+        "row_no": 35
+    },
+    {
+        "token": "<ID>",
+        "value": "c",
+        "row_no": 35
+    },
+    {
+        "token": ")",
+        "value": ")",
+        "row_no": 35
+    },
+    {
+        "token": ")",
+        "value": ")",
+        "row_no": 35
+    },
+    {
+        "token": ";",
+        "value": ";",
+        "row_no": 35
+    },
+    {
+        "token": "return",
+        "value": "return",
+        "row_no": 36
+    },
+    {
+        "token": "<INT>",
+        "value": "0",
+        "row_no": 36
+    },
+    {
+        "token": ";",
+        "value": ";",
+        "row_no": 36
+    },
+    {
+        "token": "}",
+        "value": "}",
+        "row_no": 37
     }
 ]
