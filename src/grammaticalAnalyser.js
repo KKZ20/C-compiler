@@ -1,6 +1,8 @@
+import { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } from 'constants';
 import { FORMERR } from 'dns';
 import fs from 'fs';
 import { Token } from './lexicalAnalyser.js';
+import { Semantic, SemanticSymbol } from './semanticAnalyser.js';
 import * as utils from './utils.js';
 
 // 非法位置
@@ -30,6 +32,15 @@ const Action = {
     Reduce: 1,  // 归约
     Accept: 2,  // 接受
     Error: 3    // 报错
+};
+
+// 打印格式化
+const PrintFormat = {
+    step_len: 5,
+    status_len: 200,
+    symbol_len: 300,
+    input_len: 200,
+    production_len: 60
 };
 
 
@@ -84,7 +95,7 @@ class Grammar {
         this.productions = [];
         this.startProduction = -1;
     }
-    // 工具函数
+    // 工具函数 id: string
     getSymbolIndexById(id) {
         for (let i = 0; i < this.symbols.length; i++){
             if (id === this.symbols[i].id) {
@@ -94,7 +105,7 @@ class Grammar {
         return Npos;
     }
 
-    // 合并两个集合
+    // 合并两个集合 set1, set2: set
     mergeSetExceptEmpty(set1, set2) {
         if (utils.isSameSetInOrder(set1, set2)) {
             return false;
@@ -116,7 +127,7 @@ class Grammar {
         return sizeBeforeAdd < set1.size;
     }
 
-    // 读入产生式
+    // 读入产生式 path: string
     readProductions(path) {
         try {
             // 读入grammar的产生式，并且用split函数分割成数组，以代替getline
@@ -284,7 +295,7 @@ class Grammar {
         }
     }
 
-    // 获取产生式的FIRST集
+    // 获取产生式的FIRST集 right: Array(Number)
     getFirstOfProduction(right) {
         let firstSet = new Set();
         if (right.length === 0) {
@@ -327,7 +338,7 @@ class Grammar {
         return firstSet;
     }
 
-    // Grammar类的初始化函数
+    // Grammar类的初始化函数 path: string
     grammarInitialize(path) {
         this.readProductions(path) === utils.OK;
         this.getFirstOfTerminal();
@@ -388,8 +399,10 @@ class LR1 extends Grammar {
         this.gotoTemp = new Map();
         this.gotoTable = new Map();
         this.actionTable = new Map();
+        this.semanticAnalyse = new Semantic();
     }
     // 工具函数: 在Item集合中取LR项的索引
+    // item: Item
     getLRItemsIndexByItem(item) {
         for (let i = 0; i < this.lrItems.length; i++){
             if (utils.itemEqual(item, this.lrItems[i])) {
@@ -415,7 +428,7 @@ class LR1 extends Grammar {
     }
 
     // 工具函数：判断是否是已经存在的闭包
-    // clo为Closure
+    // clo: Closure
     isExistedClosure(clo) {
         for (let i = 0; i < this.itemCluster.length; i++){
             if (utils.closureEqual(clo, this.itemCluster[i])) {
@@ -426,7 +439,7 @@ class LR1 extends Grammar {
     }
 
     // 计算closure闭包: 
-    // I为Closure
+    // I: Closure
     calClosure(I) {
         for (let i = 0; i < I.itemClosure.length; i++){
             // console.log('START:-----', I.itemClosure);
@@ -503,7 +516,7 @@ class LR1 extends Grammar {
     }
 
     // 计算GOTO状态转移
-    // I为Closure，X为Number(int)
+    // I: Closure，X: Number(int)
     gotoState(I, X) {
         let J = new Closure();
         // X必须是终结符或非终结符
@@ -635,7 +648,7 @@ class LR1 extends Grammar {
         }
     }
 
-    // 报错
+    // 报错 token: Token
     raiseError(token) {
         console.log('\nError found near : ' + token.value + '【row = ' + token.row_no + '】');
     }
@@ -649,11 +662,21 @@ class LR1 extends Grammar {
     }
 
     // 输出LR1表
-    showLR1Table() {
-        
+    showLR1Table(path) {
+        let outputStream = '';
+        // 将LR1分析表写入文件
+        try {
+            const data = fs.writeFileSync(path, outputStream);
+            console.log('\n语法分析的LR(1)分析表已导出至: ' + path);
+        }
+        catch (error) {
+            console.log('\nLR(1)分析表导出失败！');
+            console.error(error);
+            process.exit(-1);
+        }
     }
 
-    // 利用已经构建好的LR1分析表进行语法分析
+    // 利用已经构建好的LR1分析表进行语法分析 tokenstream: Array(Token)
     parseToken(tokenStream) {
         let outputStream = '';
         tokenStream.push(new Token(GrammarSymbol.EndToken, GrammarSymbol.EndToken, Number.MAX_SAFE_INTEGER));
@@ -690,6 +713,7 @@ class LR1 extends Grammar {
             let token_idx = this.getSymbolIndexById(tokenStream[i].token);
             if (!this.actionTable.has(utils.generateKey(cur_state, token_idx))) {
                 this.raiseError(tokenStream[i]);
+                // process.exit(-1);
                 do {
                     symbol_stack.pop();
                 } while (!this.actionTable.has(utils.generateKey(symbol_stack[symbol_stack.length - 1].first, token_idx)));
@@ -785,8 +809,178 @@ class LR1 extends Grammar {
         }
         return [g_error_count, s_error_count];
     }
-}
 
+    // 工具函数：打印
+    print_line(step, i, production_index, status_stack, symbol_stack, tokenStream) {
+        let temp = '';
+        // 输出第几步
+        temp += String(step).padStart(PrintFormat.step_len, ' ');
+
+        // 状态栈的string
+        let statusStackStr = '';
+        for (let status of status_stack) {
+            statusStackStr += (' ' + String(status));
+        }
+        temp += statusStackStr.padStart(PrintFormat.status_len, ' ');
+
+        // 符号栈的string
+        let symbolStackStr = '';
+        for (let symbol of symbol_stack) {
+            symbolStackStr += ('(' + String(symbol) + ',' + this.symbols[symbol].id + ')');
+        }
+        temp += symbolStackStr.padStart(PrintFormat.symbol_len, ' ');
+
+        // 输入串的string
+        let inputStr = '';
+        for (let j = 0 + i; j < tokenStream.length; j++){
+            inputStr += tokenStream[j].token;
+        }
+        temp += inputStr.padStart(PrintFormat.input_len, ' ');
+
+        // 产生式的string
+        if (production_index !== -1) {
+            let productionStr = '';
+            productionStr += this.symbols[this.productions[production_index].left].id;
+            productionStr += ' ::= ';
+            for (let r of this.productions[production_index].right) {
+                productionStr += (this.symbols[r].id + ' ');
+            }
+            temp += productionStr.padStart(PrintFormat.production_len, ' ');
+        }
+        temp += '\n';
+        return temp;
+    }
+
+    // 新的parser tokenstream: Array(Token)
+    parser(tokenStream) {
+        let endFlag = false;
+        let g_error_count = 0;
+        let s_error_count = 0;
+        let outputStream = '';
+        tokenStream.push(new Token(GrammarSymbol.EndToken, GrammarSymbol.EndToken, Number.MAX_SAFE_INTEGER));
+
+        let symbol_stack = [];  // Number(int)
+        let status_stack = [];  // Number(int)
+
+        let step = 1;
+
+        // 首行
+        outputStream += "步骤".padStart(PrintFormat.step_len, ' ');
+        outputStream += "状态".padStart(PrintFormat.status_len, ' ');
+        outputStream += "符号".padStart(PrintFormat.symbol_len, ' ');
+        outputStream += "输入串".padStart(PrintFormat.input_len, ' ');
+        outputStream += "产生式".padStart(PrintFormat.production_len, ' ');
+        outputStream += '\n';
+
+        //TODO: 语义分析
+        this.semanticAnalyse.initialize();
+        this.semanticAnalyse.addSymbolTolist(new SemanticSymbol(GrammarSymbol.StartToken, '', -1, -1, -1, -1));
+
+        // 初始化栈
+        symbol_stack.push(this.getSymbolIndexById(GrammarSymbol.EndToken));
+        status_stack.push(0);
+
+        outputStream += this.print_line(step, 0, -1, status_stack, symbol_stack, tokenStream);
+        step++;
+
+        // 开始遍历单词流
+        for (let i = 0; i < tokenStream.length; i++){
+            let current_state = status_stack[status_stack.length - 1];
+            let current_token_index = this.getSymbolIndexById(tokenStream[i].token);
+            // 如果找不到这个字符
+            if (current_token_index === -1) {
+                console.log('\n单词流中出现文法未知的终结符！');
+                process.exit(-1);
+            }
+            if (!this.actionTable.has(utils.generateKey(current_state, current_token_index))) {
+                this.raiseError(tokenStream[i]);
+                g_error_count++;
+                //FIXME: 
+                process.exit(-1);
+            }
+            else {
+                let current_action_iter = this.actionTable.get(utils.generateKey(current_state, current_token_index));
+                let current_actionInfo = utils.parseValue(current_action_iter);
+
+                // 根据ActionInfo的类别
+                switch (current_actionInfo.action) {
+                    case Action.ShiftIn:
+                        symbol_stack.push(current_token_index);
+                        status_stack.push(current_actionInfo.info);
+                        outputStream += this.print_line(step, i + 1, -1, status_stack, symbol_stack, tokenStream);
+                        step++;
+                        //TODO: 语义分析
+                        this.semanticAnalyse.addSymbolTolist(new SemanticSymbol(tokenStream[i].token,
+                            tokenStream[i].value, tokenStream[i].row_no, -1, -1, -1));
+                        break;
+                    case Action.Reduce:
+                        // 规约使用的production
+                        let production_index = current_actionInfo.info;
+                        let production = this.productions[production_index];
+                        // 非空串需要出栈，空串不需要出栈（因为右部为空）
+                        if (this.symbols[production.right[0]].type !== Type.Epsilon) {
+                            let count = production.right.length;
+                            while (count--) {
+                                symbol_stack.pop();
+                                status_stack.pop();
+                            }
+                        }
+                        if (!this.gotoTable.has(utils.generateKey(status_stack[status_stack.length - 1], production.left))) {
+                            this.raiseError(tokenStream[i]);
+                            g_error_count++;
+                            //FIXME: 
+                            process.exit(-1);
+                        }
+                        else {
+                            let current_goto_iter = this.gotoTable.get(utils.generateKey(status_stack[status_stack.length - 1], production.left));
+                            // 移入符号栈和状态栈
+                            symbol_stack.push(production.left);
+                            status_stack.push(utils.parseValue(current_goto_iter).info);
+
+                            outputStream += this.print_line(step, i, production_index, status_stack, symbol_stack, tokenStream);
+                            step++;
+                            i--;
+                            //TODO: 语义分析
+                            let pro_right = [];
+                            for (let s of production.right) {
+                                pro_right.push(this.symbols[s].id);
+                            }
+                            // if (this.symbols[production.left].id === 'ExtDef') {
+                            //     console.log(pro_right);
+                            // }
+                            this.semanticAnalyse.Analysis(this.symbols[production.left].id, pro_right);
+                        }
+                        break;
+                    case Action.Accept:
+                        outputStream += (String(step).padStart(PrintFormat.step_len, ' ') + "acc!".padStart(PrintFormat.status_len, ' ') + '\n');
+                        endFlag = true;
+                        break;
+                    case Action.Error:
+                        endFlag = true;
+                        break;
+                }
+            }
+            if (endFlag) {
+                break;
+            }
+        }
+        return outputStream;
+    }
+
+    // 输出LR1过程
+    printLr1Process(outputStream, path) {
+        // 将语法分析的栈写入文件
+        try {
+            const data = fs.writeFileSync(path, outputStream);
+            console.log('\n语法分析的LR(1)分析过程已导出至: ' + path);
+        }
+        catch (error) {
+            console.log('\nLR(1)分析过程导出失败！');
+            console.error(error);
+            process.exit(-1);
+        }
+    }
+}
 export { Grammar, LR1 };
 export { Type, GrammarSymbol, Action };
 

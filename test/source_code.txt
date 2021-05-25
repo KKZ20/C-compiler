@@ -1,7 +1,5 @@
-float a;     // Error 1
-int   b;
 int
-program(float a, int b, int c) {
+program(int a, int b, int c) {
     int i;
     int j;
     i = 0;
@@ -28,7 +26,7 @@ main() {
     int main{aaaaa}
     啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊
     */
-    float a = 12.98;
+    int a = 12;
     int   b = 3;
     int   c = 4;
     a       = b + c; // Error 3

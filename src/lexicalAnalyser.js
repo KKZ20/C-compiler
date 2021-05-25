@@ -28,7 +28,7 @@ class Token {
 /**
  * lexicalAnalysis对象
  * @param sourceCode : string, js无法像C++一样使用文件流，所以只能把代码读进一个字符串中进行处理
- * @param tokenStream : array, 其元素为Token对象，记录生成的单词流
+ * @param tokenStream : Array, 其元素为Token对象，记录生成的单词流
  */
 class lexicalAnalysis {
     constructor() {
@@ -36,7 +36,7 @@ class lexicalAnalysis {
         this.tokenStream = [];
     }
 
-    // jx提出的修改
+    // jx提出的修改 str: string
     findOperator(str) {
         for (let i = 0; i < Operator.length; i++){
             if (str === Operator[i] || str === Operator[i][0]) {
@@ -46,7 +46,7 @@ class lexicalAnalysis {
         return false;
     }
 
-    // 根据指定路径读文件内容
+    // 根据指定路径读文件内容 path: string
     readSourceCode(path) {
         try {
             this.sourceCode = fs.readFileSync(path, 'utf-8');
@@ -58,7 +58,7 @@ class lexicalAnalysis {
         }
     }
 
-    // 扫描并分析读入的代码
+    // 扫描并分析读入的代码 codeSteam: string
     //FIXME: 解决一下gp循环输出的问题
     scanCode(codeStream) {
         const length = codeStream.length;
@@ -220,7 +220,7 @@ class lexicalAnalysis {
         }
     }
 
-    // 将结果输出在文件中
+    // 将结果输出在文件中 path: string
     printToJson(path) {
         let tokenStream_json = JSON.stringify(this.tokenStream, null, 4);
         try {

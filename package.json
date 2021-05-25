@@ -12,5 +12,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "chalk": "^4.1.1",
+    "progress": "^2.0.3"
+  }
 }
