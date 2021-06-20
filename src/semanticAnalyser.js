@@ -326,7 +326,7 @@ class Semantic {
             this.symbolList.pop();
         }
         // 在最前面加入四元式
-        this.quadruples.unshift(new Quadruple(0, 'j', '-', '-', String(this.mainLabel + 100)));
+        this.quadruples.unshift(new Quadruple(0, 'j', '-', '-', String(this.mainLabel)));
         
         // 更新symbolList
         this.symbolList.push(new SemanticSymbol(left, '', -1, -1, -1, -1));
@@ -907,3 +907,4 @@ class Semantic {
 }
 
 export { Semantic, SemanticSymbol };
+export { Quadruple };

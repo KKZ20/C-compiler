@@ -1,8 +1,0 @@
-int main()
-{
-    int a = 3 ||* 4;
-    int b = 4;
-    int c = 2;
-    a=program(a,b,demo(c));
-    return 0;
-}123a

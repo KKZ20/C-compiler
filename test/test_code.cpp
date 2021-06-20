@@ -11,9 +11,10 @@ int program(int a, int b, int c)
 	{
 		j = a;
 	}
+	i = j * 2;
 	while (i <= 100)
 	{
-		i = j * 2;
+		i = i * 2;
 	}
 	return i;
 }

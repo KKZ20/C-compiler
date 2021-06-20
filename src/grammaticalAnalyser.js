@@ -1,6 +1,7 @@
 import { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } from 'constants';
 import { FORMERR } from 'dns';
-import fs from 'fs';
+import fs, { unwatchFile } from 'fs';
+import { exit } from 'process';
 import { Token } from './lexicalAnalyser.js';
 import { Semantic, SemanticSymbol } from './semanticAnalyser.js';
 import * as utils from './utils.js';
@@ -663,7 +664,69 @@ class LR1 extends Grammar {
 
     // 输出LR1表
     showLR1Table(path) {
-        let outputStream = '';
+        let outputStream = ' ';
+        let cnt = 1;
+        for (let ter of this.terminals) {
+            if (this.symbols[ter].id === ',') {
+                // ,用`代替
+                outputStream += (',`');
+            }
+            else {
+                outputStream += (',' + this.symbols[ter].id);
+            }
+            cnt++;
+        }
+        
+        for (let nonter of this.nonTerminals) {
+            if(this.symbols[nonter].id === GrammarSymbol.ExtendStart){
+                continue;
+            }
+            outputStream += (',' + this.symbols[nonter].id);
+            cnt++;
+        }
+        outputStream += '\n';
+        // 初始化一个固定大小的二维数组
+        let arr = [];
+        for(let i = 0; i < this.itemCluster.length; i++) {
+            arr[i] = new Array();
+            for(let j = 0; j < cnt; j++) {
+                arr[i][j] = ' ';
+            }
+        }
+
+        for (let [key, value] of this.actionTable) {
+            let tmpkey = utils.parseKey(key);
+            let tmpvalue = utils.parseValue(value);
+            let str = '';
+            if (tmpvalue.action === Action.ShiftIn) {
+                str = 's' + String(tmpvalue.info);
+            }
+            else if (tmpvalue.action === Action.Reduce) {
+                str = 'r' + String(tmpvalue.info);
+            }
+            else if (tmpvalue.action === Action.Accept) {
+                str = 'acc';
+            }
+            // 差了个@，所以要减1
+            arr[tmpkey.i][tmpkey.j - 1 < 0 ? 0 : tmpkey.j - 1] = str;
+        }
+
+        for (let [key, value] of this.gotoTable) {
+            let tmpkey = utils.parseKey(key);
+            let tmpvalue = utils.parseValue(value);
+            let str = tmpvalue.info;
+            // 差了个@和S（拓广文法起始符），所以要减2
+            arr[tmpkey.i][tmpkey.j - 2] = str;
+        }
+
+        for (let i = 0; i < arr.length; i++){
+            outputStream += (String(i));
+            for (let j = 0; j < arr[i].length; j++){
+                outputStream += (',' + arr[i][j]);
+            }
+            outputStream += '\n';
+        }
+
         // 将LR1分析表写入文件
         try {
             const data = fs.writeFileSync(path, outputStream);

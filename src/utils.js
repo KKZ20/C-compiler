@@ -139,7 +139,13 @@ let generateKey = (value1, value2) => {
     return String(value1) + '_' + String(value2);
 }
 
-// 工具函数：解析出action表和goto表的值，以一个对象存储
+// 工具函数：解析出action表和goto表的值(key)，以一个对象存储
+function parseKey(str) {
+    let key = str.split('_');
+    return { i: parseInt(key[0]), j: parseInt(key[1]) };
+}
+
+// 工具函数：解析出action表和goto表的值(value)，以一个对象存储
 function parseValue(str) {
     let actionInfo = str.split('_');
     return { action: parseInt(actionInfo[0]), info: parseInt(actionInfo[1]) };
@@ -177,6 +183,8 @@ function mySplit(input, str) {
     return temp;
 }
 /* ---------------------------------end------------------------------------- */
+let timeCompare = (a, b) => a.unuseTime < b.unuseTime;
+
 
 export { ERROR, OK };
 export { isSpace, isAlpha, isDigit };
@@ -184,4 +192,5 @@ export { isInteger, isFloat };
 export { itemEqual, isSameSetInOrder, lr1ItemEqual, closureEqual };
 export { isNonTerminal, isTerminal, isEpsilon, isEndtoken };
 export { deepCopySingle, mySplit };
-export { generateKey, parseValue };
+export { generateKey, parseKey, parseValue };
+export { timeCompare };
