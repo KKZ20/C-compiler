@@ -20,9 +20,10 @@ let grammarPath = 'null';
 //TODO: 
 function usage() {
     console.log('请阅读本程序运行方法: ');
-    console.log('\t1. 需要安装node.js环境（开发时所用版本为v15.7.0）')
-    console.log('\t2. 请将文法文件放入和要进行编译的代码放入test文件夹中')
-    console.log('node main.js --test xxxx --grammar xxxx');
+    console.log('\t1. 需要安装node.js环境（开发时所用版本为v15.7.0）');
+    console.log('\t2. 请将文法文件放入和要进行编译的代码放入test文件夹中');
+    console.log('运行指令为：');
+    console.log('\tnode main.js --test xxxx --grammar xxxx');
 }
 
 var lexAnalyse = new lexicalAnalysis();
